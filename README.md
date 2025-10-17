@@ -1,75 +1,36 @@
-## **Project Features to Build:**
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-### **Phase 1: Core Features (Week 1)**
-✅ Product listing page with filtering/sorting  
-✅ Product detail page  
-✅ Search functionality  
-✅ Category navigation  
-✅ Shopping cart (add/remove/update quantities)  
-✅ Responsive design (mobile + desktop)
+## Getting Started
 
-### **Phase 2: Advanced Features (Week 2)**
-✅ Product comparison tool (compare 2-3 products side-by-side)  
-✅ Wishlist/Favorites (store in localStorage)  
-✅ Price tracking across different APIs  
-✅ User reviews and ratings display  
-✅ Dark mode toggle  
-✅ Loading states and error handling
+First, run the development server:
 
-### **Phase 3: Polish (Week 3)**
-✅ Checkout flow (fake, just UI)  
-✅ Order history (localStorage)  
-✅ Advanced filters (price range, rating, etc.)  
-✅ Image gallery/carousel  
-✅ Toast notifications  
-✅ Skeleton loaders
-
----
-
-## **Tech Stack Recommendations:**
-
-**Must-Have for Job Interviews:**
-- ⚛️ **React** (with TypeScript)
-- 🎣 **React Hooks** (useState, useEffect, useContext, custom hooks)
-- 🎨 **Tailwind CSS** or **Material-UI**
-- 🔄 **React Router** for navigation
-- 📦 **Context API** or **Zustand** for state management
-
-**Nice-to-Have (Bonus Points):**
-- ▲ **Next.js** instead of Create React App
-- 🔍 **React Query** for API data fetching
-- 📊 **Chart.js** for price comparison charts
-- ✅ **React Hook Form** for forms
-- 🧪 **Jest + React Testing Library** for tests
-
----
-
-## **Folder Structure:**
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
-ecommerce-aggregator/
-├── src/
-│   ├── components/
-│   │   ├── ProductCard.tsx
-│   │   ├── ProductList.tsx
-│   │   ├── Cart.tsx
-│   │   ├── SearchBar.tsx
-│   │   └── ComparisonTable.tsx
-│   ├── pages/
-│   │   ├── HomePage.tsx
-│   │   ├── ProductDetailPage.tsx
-│   │   ├── CartPage.tsx
-│   │   └── ComparisonPage.tsx
-│   ├── hooks/
-│   │   ├── useProducts.ts
-│   │   ├── useCart.ts
-│   │   └── useFavorites.ts
-│   ├── context/
-│   │   └── CartContext.tsx
-│   ├── services/
-│   │   ├── fakeStoreApi.ts
-│   │   ├── dummyJsonApi.ts
-│   │   └── platziApi.ts
-│   ├── types/
-│   │   └── Product.ts
-│   └── utils/
-│       └── priceFormatter.ts
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
