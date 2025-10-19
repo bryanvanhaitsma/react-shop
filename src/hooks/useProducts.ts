@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Product, ProductFilters, ApiSource } from '@/types/Product';
-//import { apiService } from '@/services/apiService';
+import { apiService } from '@/services/apiService';
 import { fakeStoreApi } from '@/services/fakeStoreApi';
 
 export const useProducts = (filters?: ProductFilters) => {
