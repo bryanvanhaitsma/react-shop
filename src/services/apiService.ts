@@ -1,5 +1,6 @@
 import { fakeStoreApi } from './fakeStoreApi';
 import { dummyJsonApi } from './dummyJsonApi';
+import { platziApi } from './platziApi';
 import { Product, ApiSource } from '@/types/Product';
 
 // Unified API service that aggregates all sources
@@ -28,7 +29,7 @@ export const apiService = {
         case 'dummyjson':
           return await dummyJsonApi.getAllProducts();
         case 'platzi':
-          return []; // Add Platzi API later
+          return await platziApi.getAllProducts();
         default:
           return [];
       }
@@ -45,6 +46,8 @@ export const apiService = {
         return await fakeStoreApi.getProduct(id);
       } else if (id.startsWith('dummyjson-')) {
         return await dummyJsonApi.getProduct(id);
+      } else if (id.startsWith('platzi-')) {
+        return await platziApi.getProduct(id);
       }
       return null;
     } catch (error) {
@@ -53,19 +56,21 @@ export const apiService = {
     }
   },
 
-  // Search across all sources
+ // Search across all sources
   searchProducts: async (query: string): Promise<Product[]> => {
     try {
-      // DummyJSON has search API
-      const dummyResults = await dummyJsonApi.searchProducts(query);
+      const [dummyResults, fakeStoreResults, platziResults] = await Promise.all([
+        dummyJsonApi.searchProducts(query),
+        // FakeStore doesn't have search, so we fetch all and filter
+        fakeStoreApi.getAllProducts().then(products =>
+          products.filter((product) =>
+            product.title.toLowerCase().includes(query.toLowerCase())
+          )
+        ),
+        platziApi.searchProducts(query),
+      ]);
 
-      // FakeStore doesn't have search, so we fetch all and filter
-      const fakeStoreProducts = await fakeStoreApi.getAllProducts();
-      const fakeStoreResults = fakeStoreProducts.filter((product) =>
-        product.title.toLowerCase().includes(query.toLowerCase())
-      );
-
-      return [...dummyResults, ...fakeStoreResults];
+      return [...dummyResults, ...fakeStoreResults, ...platziResults];
     } catch (error) {
       console.error('Error searching products:', error);
       return [];
@@ -75,13 +80,14 @@ export const apiService = {
   // Get all unique categories from all sources
   getAllCategories: async (): Promise<string[]> => {
     try {
-      const [fakeStoreCategories, dummyJsonCategories] = await Promise.all([
+      const [fakeStoreCategories, dummyJsonCategories, platziCategories] = await Promise.all([
         fakeStoreApi.getCategories(),
         dummyJsonApi.getCategories(),
+        platziApi.getCategoryNames(),
       ]);
 
       // Combine and remove duplicates
-      const allCategories = [...fakeStoreCategories, ...dummyJsonCategories];
+      const allCategories = [...fakeStoreCategories, ...dummyJsonCategories, ...platziCategories];
       return Array.from(new Set(allCategories));
     } catch (error) {
       console.error('Error fetching categories:', error);

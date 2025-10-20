@@ -1,12 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import { useProducts } from '@/hooks/useProducts';
 import { useCart } from '@/context/CartContext';
 import { formatPrice, getSourceBadgeColor, truncateText } from '@/utils/formatters';
 import { ShoppingCart } from 'lucide-react';
+import { ApiSource } from '@/types/Product';
+import ApiSourceFilter from '@/components/ApiSourceFilter';
 
 export default function HomePage() {
-  const { products, loading, error } = useProducts();
+  const [selectedSource, setSelectedSource] = useState<ApiSource | null>(null);
+  const { products, loading, error } = useProducts({ source: selectedSource || undefined });
   const { addToCart, getItemCount } = useCart();
 
   if (loading) {
@@ -40,6 +44,7 @@ export default function HomePage() {
             <h1 className="text-2xl font-bold text-gray-900">
               🛍️ E-Commerce Aggregator
             </h1>
+            <ApiSourceFilter selectedSource={selectedSource} onSourceChange={setSelectedSource} />
             <div className="relative">
               <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                 <ShoppingCart size={20} />
