@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Product, ProductFilters, ApiSource } from '@/types/Product';
 import { apiService } from '@/services/apiService';
-import { fakeStoreApi } from '@/services/fakeStoreApi';
 
 export const useProducts = (filters?: ProductFilters) => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -24,8 +23,8 @@ export const useProducts = (filters?: ProductFilters) => {
         } else if (filters?.search) {
           fetchedProducts = await apiService.searchProducts(filters.search);
         } else {
-          // fetchedProducts = await apiService.getAllProducts();
-          fetchedProducts = await fakeStoreApi.getAllProducts();
+          // Default: fetch from all configured sources
+          fetchedProducts = await apiService.getAllProducts();
         }
 
         // Apply client-side filters

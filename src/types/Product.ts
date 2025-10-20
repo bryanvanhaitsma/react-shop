@@ -24,6 +24,4 @@ export interface ProductFilters {
   source?: ApiSource;
 }
 
-export interface ApiProduct {
-  [key: string]: any;
-}
+export type ApiProduct = Record<string, unknown>;
