@@ -7,6 +7,8 @@ import { formatPrice, getSourceBadgeColor, truncateText } from '@/utils/formatte
 import { ShoppingCart } from 'lucide-react';
 import { ApiSource } from '@/types/Product';
 import ApiSourceFilter from '@/components/ApiSourceFilter';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HomePage() {
   const [selectedSource, setSelectedSource] = useState<ApiSource | null>(null);
@@ -48,7 +50,9 @@ export default function HomePage() {
             <div className="relative">
               <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                 <ShoppingCart size={20} />
-                <span className="font-semibold">Cart ({getItemCount()})</span>
+                <Link href="/cart">
+                  <span className="font-semibold">Cart ({getItemCount()})</span>
+                </Link>
               </button>
             </div>
           </div>
@@ -75,11 +79,14 @@ export default function HomePage() {
             >
               {/* Product Image */}
               <div className="relative h-64 bg-gray-100">
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-full h-full object-contain p-4"
-                />
+                <Link href={`/product/${product.id}`} passHref>
+                  <Image  
+                    src={product.image}
+                    alt={product.title}
+                    className="w-full h-full object-contain p-4"
+                    fill 
+                  />
+                </Link>
                 {/* Source Badge */}
                 <div className="absolute top-2 right-2">
                   <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getSourceBadgeColor(product.source)}`}>
