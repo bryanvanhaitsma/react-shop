@@ -44,6 +44,24 @@ export const useProducts = (filters?: ProductFilters) => {
           filtered = filtered.filter((product) => product.price <= filters.maxPrice!);
         }
 
+        // Apply sorting
+        if (filters?.sort) {
+          filtered = [...filtered].sort((a, b) => {
+            switch (filters.sort) {
+              case 'price-asc':
+                return a.price - b.price;
+              case 'price-desc':
+                return b.price - a.price;
+              case 'name-asc':
+                return a.title.localeCompare(b.title);
+              case 'name-desc':
+                return b.title.localeCompare(a.title);
+              default:
+                return 0;
+            }
+          });
+        }
+
         setProducts(filtered);
       } catch (err) {
         setError('Failed to fetch products. Please try again.');
@@ -54,7 +72,7 @@ export const useProducts = (filters?: ProductFilters) => {
     };
 
     fetchProducts();
-  }, [filters?.source, filters?.search, filters?.category, filters?.minPrice, filters?.maxPrice]);
+  }, [filters?.source, filters?.search, filters?.category, filters?.minPrice, filters?.maxPrice, filters?.sort]);
 
   return { products, loading, error };
 };

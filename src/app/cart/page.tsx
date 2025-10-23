@@ -35,12 +35,14 @@ export default function CartPage() {
           >
             {/* Product Image */}
             <div className="relative w-24 h-24 flex-shrink-0">
-              <Image
-                src={item.product.image}
-                alt={item.product.title}
-                fill
-                className="object-cover rounded"
-              />
+              <Link href={`/product/${item.product.id}`}>
+                <Image
+                  src={item.product.image}
+                  alt={item.product.title}
+                  fill
+                  className="object-cover rounded"
+                />
+              </Link>
             </div>
 
             {/* Product Details */}

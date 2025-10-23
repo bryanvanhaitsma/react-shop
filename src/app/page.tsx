@@ -5,14 +5,19 @@ import { useProducts } from '@/hooks/useProducts';
 import { useCart } from '@/context/CartContext';
 import { formatPrice, getSourceBadgeColor, truncateText } from '@/utils/formatters';
 import { ShoppingCart } from 'lucide-react';
-import { ApiSource } from '@/types/Product';
+import { ApiSource, SortOption } from '@/types/Product';
 import ApiSourceFilter from '@/components/ApiSourceFilter';
+import ProductSort from '@/components/products/ProductSort';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function HomePage() {
   const [selectedSource, setSelectedSource] = useState<ApiSource | null>(null);
-  const { products, loading, error } = useProducts({ source: selectedSource || undefined });
+  const [sortOption, setSortOption] = useState<SortOption>('price-desc');
+  const { products, loading, error } = useProducts({ 
+    source: selectedSource || undefined,
+    sort: sortOption
+  });
   const { addToCart, getItemCount } = useCart();
 
   if (loading) {
@@ -65,9 +70,15 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold text-gray-900 mb-2">
             All Products
           </h2>
-          <p className="text-gray-600">
-            Showing {products.length} products from multiple stores
-          </p>
+          <div className="flex items-center justify-between">
+            <p className="text-gray-600">
+              Showing {products.length} products from multiple stores
+            </p>
+            <ProductSort 
+              value={sortOption}
+              onChange={setSortOption}
+            />
+          </div>
         </div>
 
         {/* Products Grid */}
