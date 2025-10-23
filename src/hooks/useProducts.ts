@@ -56,6 +56,16 @@ export const useProducts = (filters?: ProductFilters) => {
                 return a.title.localeCompare(b.title);
               case 'name-desc':
                 return b.title.localeCompare(a.title);
+              case 'rating-asc':
+                // Default to 0 if rating is undefined
+                const rateA = a.rating?.rate ?? 0;
+                const rateB = b.rating?.rate ?? 0;
+                return rateA - rateB;
+              case 'rating-desc':
+                // Default to 0 if rating is undefined
+                const rateC = a.rating?.rate ?? 0;
+                const rateD = b.rating?.rate ?? 0;
+                return rateD - rateC;
               default:
                 return 0;
             }

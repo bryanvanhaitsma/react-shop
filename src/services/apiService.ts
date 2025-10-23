@@ -8,12 +8,13 @@ export const apiService = {
   // Get products from all sources
   getAllProducts: async (): Promise<Product[]> => {
     try {
-      const [fakeStoreProducts, dummyJsonProducts] = await Promise.all([
+      const [fakeStoreProducts, dummyJsonProducts, platziProducts] = await Promise.all([
         fakeStoreApi.getAllProducts(),
         dummyJsonApi.getAllProducts(20), // Limit to 20 for performance
+        platziApi.getAllProducts(),  
       ]);
 
-      return [...fakeStoreProducts, ...dummyJsonProducts];
+      return [...fakeStoreProducts, ...dummyJsonProducts, ...platziProducts];
     } catch (error) {
       console.error('Error fetching all products:', error);
       return [];

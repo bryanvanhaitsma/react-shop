@@ -13,6 +13,8 @@ const sortOptions = [
   { value: 'price-desc', label: 'Price: High to Low' },
   { value: 'name-asc', label: 'Name: A to Z' },
   { value: 'name-desc', label: 'Name: Z to A' },
+  { value: 'rating-asc', label: 'Rating: Low to High' },
+  { value: 'rating-desc', label: 'Rating: High to Low' },
 ];
 
 export default function ProductSort({ value, onChange }: ProductSortProps) {
