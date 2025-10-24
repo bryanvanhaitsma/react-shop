@@ -1,7 +1,7 @@
 'use client';
 
 import { use, useState, useEffect } from 'react';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/hooks/useCart';
 import { apiService } from '@/services/apiService';
 import { Product } from '@/types/Product';
 import { formatPrice, getSourceBadgeColor } from '@/utils/formatters';

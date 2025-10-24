@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useProducts } from '@/hooks/useProducts';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/hooks/useCart';
 import { formatPrice, getSourceBadgeColor, truncateText } from '@/utils/formatters';
 import { ShoppingCart } from 'lucide-react';
 import { ApiSource, SortOption, Product } from '@/types/Product';
