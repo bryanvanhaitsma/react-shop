@@ -7,7 +7,6 @@ const nextConfig: NextConfig = {
       'cdn.dummyjson.com', 
       'platzi.com', 
       'i.imgur.com',
-      'placehold.co',
     ],
   },
 };
