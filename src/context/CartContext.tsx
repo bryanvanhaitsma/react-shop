@@ -107,12 +107,3 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     </CartContext.Provider>
   );
 };
-
-// Custom hook to use cart context
-export const useCart = (): CartContextType => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error('useCart must be used within CartProvider');
-  }
-  return context;
-};
