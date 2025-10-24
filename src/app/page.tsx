@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useProducts } from '@/hooks/useProducts';
 import { useCart } from '@/hooks/useCart';
 import { formatPrice, getSourceBadgeColor, truncateText } from '@/utils/formatters';
@@ -10,16 +10,33 @@ import ApiSourceFilter from '@/components/ApiSourceFilter';
 import ProductSort from '@/components/products/ProductSort';
 import Link from 'next/link';
 import Image from 'next/image';
+import HeaderSearch from '@/components/HeaderSearch';
 
 export default function HomePage() {
   const [selectedSource, setSelectedSource] = useState<ApiSource | null>(null);
   const [sortOption, setSortOption] = useState<SortOption>('price-desc');
   const [animatingButtons, setAnimatingButtons] = useState<Record<string, boolean>>({});
-  const { products, loading, error } = useProducts({ 
-    source: selectedSource || undefined,
-    sort: sortOption
-  });
   const { addToCart, getItemCount } = useCart();
+  const [search, setSearch] = useState<string>('');
+  const [debouncedSearch, setDebouncedSearch] = useState<string>('');
+
+  // Debounce search input
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedSearch(search.trim()), 400); // 400ms debounce
+    return () => clearTimeout(t);
+  }, [search]);
+
+  // pass filters, sorting, and search to useProducts
+  const { products, loading, error } = useProducts({
+    source: selectedSource || undefined,
+    sort: sortOption,
+    search: debouncedSearch || undefined,
+  });
+
+
+
+
+
 
   const handleAddToCart = (product: Product) => {
     // Start animation
@@ -64,8 +81,9 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-gray-900">
               🛍️ E-Commerce Aggregator
-            </h1>
+            </h1>     
             <ApiSourceFilter selectedSource={selectedSource} onSourceChange={setSelectedSource} />
+            <HeaderSearch value={search} onChange={setSearch} />
             <div className="relative">
               <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                 <ShoppingCart size={20} />

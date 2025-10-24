@@ -16,7 +16,7 @@ export default function ApiSourceFilter({ selectedSource, onSourceChange }: ApiS
   ];
 
   return (
-    <div className="flex flex-wrap gap-2 mb-6">
+    <div className="flex flex-wrap gap-2">
       {sources.map((source) => (
         <button
           key={source.label}
