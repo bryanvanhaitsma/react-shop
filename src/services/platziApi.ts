@@ -20,6 +20,17 @@ const normalizeProduct = (apiProduct: any): Product => {
   };
 };
 
+
+interface PlatziCategory {
+  id: number; 
+  name: string;
+  slug: string;
+  image: string;
+  creationAt: string;
+  updatedAt: string;
+}
+
+
 export const platziApi = {
   // Get all products
   getAllProducts: async (limit: number = 20): Promise<Product[]> => {
@@ -67,7 +78,7 @@ export const platziApi = {
   },
 
   // Get category names only
-  getCategoryNames: async (): Promise<string[]> => {
+  getCategoryNames: async (): Promise<PlatziCategory[]> => {
     try {
       const categories = await platziApi.getCategories();
       return categories.map(cat => cat.name);

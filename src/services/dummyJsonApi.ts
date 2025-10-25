@@ -22,6 +22,14 @@ const normalizeProduct = (apiProduct: any): Product => {
   };
 };
 
+
+interface DummyJsonCategory {
+  slug: string;
+  name: string;
+  url: string;
+}
+
+
 export const dummyJsonApi = {
   // Get all products
   getAllProducts: async (limit: number = 30): Promise<Product[]> => {
@@ -69,7 +77,7 @@ export const dummyJsonApi = {
   },
 
   // Get all categories
-  getCategories: async (): Promise<string[]> => {
+  getCategories: async (): Promise<DummyJsonCategory[]> => {
     try {
       const response = await axios.get(`${BASE_URL}/products/categories`);
       return response.data;
