@@ -4,10 +4,12 @@ import { use, useState, useEffect } from 'react';
 import { useCart } from '@/hooks/useCart';
 import { apiService } from '@/services/apiService';
 import { Product } from '@/types/Product';
-import { formatPrice, getSourceBadgeColor } from '@/utils/formatters';
+import { formatPrice, getSourceBadgeColor, slugifyString } from '@/utils/formatters';
 import { ShoppingCart, ArrowLeft, Star, Package, Truck, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import HeaderCartButton from '@/components/ui/HeaderCartButton';
+import Head from 'next/head';
 
 interface PageProps {
   params: Promise<{
@@ -86,13 +88,7 @@ export default function ProductDetailPage({ params }: PageProps) {
               <ArrowLeft size={20} />
               <span className="font-semibold">Back to Products</span>
             </Link>
-            <Link
-              href="/cart/"
-              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-            >
-              <ShoppingCart size={20} />
-              <span className="font-semibold">Cart ({getItemCount()})</span>
-            </Link>
+            <HeaderCartButton />
           </div>
         </div>
       </header>
@@ -141,7 +137,11 @@ export default function ProductDetailPage({ params }: PageProps) {
             <div className="flex flex-col">
               {/* Category */}
               <p className="text-sm text-blue-600 font-semibold uppercase tracking-wide mb-2">
-                {product.category}
+                <Link
+                  href={`/categories/${slugifyString(product.category)}`}
+                >
+                  {product.category}
+                </Link>
               </p>
 
               {/* Title */}

@@ -2,20 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { useProducts } from '@/hooks/useProducts';
-import { useCart } from '@/hooks/useCart';
-import { ShoppingCart } from 'lucide-react';
 import { ApiSource, SortOption, Product } from '@/types/Product';
 import ApiSourceFilter from '@/components/ApiSourceFilter';
 import ProductSort from '@/components/products/ProductSort';
-import Link from 'next/link';
 import HeaderSearch from '@/components/HeaderSearch';
+import HeaderCartButton from '@/components/ui/HeaderCartButton';
 import ProductCard from '@/components/products/ProductCard';
 
 
 export default function HomePage() {
   const [selectedSource, setSelectedSource] = useState<ApiSource | null>(null);
   const [sortOption, setSortOption] = useState<SortOption>('price-desc');
-  const { getItemCount } = useCart();
   const [search, setSearch] = useState<string>('');
   const [debouncedSearch, setDebouncedSearch] = useState<string>('');
 
@@ -69,12 +66,7 @@ export default function HomePage() {
             <ApiSourceFilter selectedSource={selectedSource} onSourceChange={setSelectedSource} />
             <HeaderSearch value={search} onChange={setSearch} />
             <div className="relative">
-              <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                <ShoppingCart size={20} />
-                <Link href="/cart">
-                  <span className="font-semibold">Cart ({getItemCount()})</span>
-                </Link>
-              </button>
+              <HeaderCartButton />
             </div>
           </div>
         </div>

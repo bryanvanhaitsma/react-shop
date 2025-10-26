@@ -7,6 +7,7 @@ import { ShoppingCart, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/hooks/useCart';
 import ProductCard from '@/components/products/ProductCard';
+import HeaderCartButton from '@/components/ui/HeaderCartButton';
 
 interface PageProps {
   params: Promise<{
@@ -82,13 +83,7 @@ export default function CategoryPage({ params }: PageProps) {
               <span className="font-semibold">Back to Products</span>
             </Link>
             <h1 className="text-xl font-bold text-gray-900 capitalize">Category: {decodedCategory}</h1>
-            <Link
-              href="/cart"
-              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-            >
-              <ShoppingCart size={20} />
-              <span className="font-semibold">Cart</span>
-            </Link>
+            <HeaderCartButton />
           </div>
         </div>
       </header>

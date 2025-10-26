@@ -5,6 +5,7 @@ import { dummyJsonApi } from '@/services/dummyJsonApi';
 import { platziApi } from '@/services/platziApi';
 import { getSourceBadgeColor } from '@/utils/formatters';
 import { slugifyString } from '@/utils/formatters';
+import HeaderCartButton from '@/components/ui/HeaderCartButton';
 
 
 
@@ -26,6 +27,7 @@ export default async function CategoriesPage() {
         <div className="container mx-auto px-4 py-4">
           <h1 className="text-2xl font-bold text-gray-900">Categories</h1>
         </div>
+        <HeaderCartButton />
       </header>
 
       <main className="container mx-auto px-4 py-8">
