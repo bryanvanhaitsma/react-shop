@@ -3,24 +3,23 @@
 import { use, useState, useEffect } from 'react';
 import { apiService } from '@/services/apiService';
 import { Product } from '@/types/Product';
-import { formatPrice, getSourceBadgeColor } from '@/utils/formatters';
 import { ShoppingCart, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useCart } from '@/hooks/useCart';
+import ProductCard from '@/components/products/ProductCard';
 
 interface PageProps {
   params: Promise<{
-    id: string;
+    slug: string;
   }>;
 }
 
 export default function CategoryPage({ params }: PageProps) {
-  const { id } = use(params);
+  const { slug } = use(params);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
-  const decodedCategory = decodeURIComponent(id);
+  const decodedCategory = decodeURIComponent(slug);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -98,54 +97,7 @@ export default function CategoryPage({ params }: PageProps) {
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition"
-            >
-              <Link href={`/product/${product.id}`}>
-                <div className="relative aspect-square bg-gray-100">
-                  <Image
-                    src={product.image}
-                    alt={product.title}
-                    className="object-contain p-4"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getSourceBadgeColor(product.source)}`}>
-                      {product.source}
-                    </span>
-                  </div>
-                </div>
-              </Link>
-
-              <div className="p-4">
-                <Link href={`/product/${product.id}`}>
-                  <h2 className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600 transition line-clamp-2">
-                    {product.title}
-                  </h2>
-                </Link>
-
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-2xl font-bold text-green-600">
-                    {formatPrice(product.price)}
-                  </span>
-                  {product.stock !== undefined && product.stock < 10 && (
-                    <span className="text-sm text-orange-600 font-semibold">
-                      Only {product.stock} left!
-                    </span>
-                  )}
-                </div>
-
-                <button
-                  onClick={() => addToCart(product, 1)}
-                  className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2"
-                >
-                  <ShoppingCart size={20} />
-                  Add to Cart
-                </button>
-              </div>
-            </div>
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </main>
