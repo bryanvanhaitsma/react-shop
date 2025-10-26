@@ -41,7 +41,7 @@ export default async function CategoriesPage() {
             <ul className="space-y-2">
               {fakeCategories.map((cat: string) => (
                 <li key={`fakestore-${cat}`}>
-                  <Link href={`/category/${slugifyString(cat)}`}
+                  <Link href={`/categories/${slugifyString(cat)}`}
                     className="block w-full text-left px-3 py-2 rounded hover:bg-gray-100 transition flex items-center justify-between"
                   >
                     <span className="capitalize">{cat}</span>
@@ -61,7 +61,7 @@ export default async function CategoriesPage() {
             <ul className="space-y-2">
               {dummyCategories.map((category) => (
                 <li key={`dummy-${category.slug}`}>
-                  <Link href={`/category/${encodeURIComponent(category.slug)}`}
+                  <Link href={`/categories/${encodeURIComponent(category.slug)}`}
                     className="block w-full text-left px-3 py-2 rounded hover:bg-gray-100 transition flex items-center justify-between"
                   >
                     <span className="capitalize">{category.name}</span>
@@ -81,7 +81,7 @@ export default async function CategoriesPage() {
             <ul className="space-y-2">
               {platziCategories.map((category) => (
                 <li key={`platzi-${category.id}`}>
-                  <Link href={`/category/${category.slug}`}
+                  <Link href={`/categories/${category.slug}`}
                     className="block w-full text-left px-3 py-2 rounded hover:bg-gray-100 transition flex items-center justify-between"
                   >
                     <span className="capitalize">{category.name}</span>
@@ -102,7 +102,7 @@ export default async function CategoriesPage() {
               ...dummyCategories,
               ...platziNames,
             ])).map((cat: string) => (
-              <Link key={`all-${cat}`} href={`/category/${encodeURIComponent(cat)}`}
+              <Link key={`all-${cat}`} href={`/categories/${encodeURIComponent(cat)}`}
                 className="inline-block px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 transition"
               >
                 {cat}

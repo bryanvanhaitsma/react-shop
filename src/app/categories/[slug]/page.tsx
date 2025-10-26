@@ -81,7 +81,7 @@ export default function CategoryPage({ params }: PageProps) {
               <ArrowLeft size={20} />
               <span className="font-semibold">Back to Products</span>
             </Link>
-            <h1 className="text-xl font-bold text-gray-900 capitalize">{decodedCategory}</h1>
+            <h1 className="text-xl font-bold text-gray-900 capitalize">Category: {decodedCategory}</h1>
             <Link
               href="/cart"
               className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"

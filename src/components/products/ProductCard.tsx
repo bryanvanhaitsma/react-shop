@@ -63,7 +63,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         
         <p className="text-sm text-gray-600 mb-2 capitalize">
           <Link
-            href={`/category/${slugifyString(product.category)}`}
+            href={`/categories/${slugifyString(product.category)}`}
             className="hover:underline"
           >
             {product.category}
