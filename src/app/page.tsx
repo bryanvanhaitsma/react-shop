@@ -37,7 +37,7 @@ export default function HomePage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading products...</p>
+          <p className="">Loading products...</p>
         </div>
       </div>
     );
@@ -55,12 +55,12 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold">
               🛍️ E-Commerce Aggregator
             </h1>     
             <ApiSourceFilter selectedSource={selectedSource} onSourceChange={setSelectedSource} />
@@ -75,11 +75,11 @@ export default function HomePage() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         <div className="mb-6">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+          <h2 className="text-3xl font-bold mb-2">
             All Products
           </h2>
           <div className="flex items-center justify-between">
-            <p className="text-gray-600">
+            <p>
               Showing {products.length} products from multiple stores
             </p>
             <ProductSort 
@@ -99,20 +99,11 @@ export default function HomePage() {
         {/* Empty State */}
         {products.length === 0 && !loading && (
           <div className="text-center py-16">
-            <p className="text-xl text-gray-600">No products found</p>
+            <p className="text-xl">No products found</p>
           </div>
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <p>E-Commerce Aggregator - React Portfolio Project</p>
-          <p className="text-sm text-gray-400 mt-2">
-            Data from FakeStore API & DummyJSON
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

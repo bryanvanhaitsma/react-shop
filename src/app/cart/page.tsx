@@ -12,7 +12,7 @@ export default function CartPage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-4">Shopping Cart</h1>
-        <p className="text-gray-600">Your cart is empty.</p>
+        <p>Your cart is empty.</p>
         <Link
           href="/"
           className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
@@ -31,7 +31,7 @@ export default function CartPage() {
         {cart.items.map((item) => (
           <div
             key={item.product.id}
-            className="flex items-start space-x-4 p-4 bg-white rounded-lg shadow"
+            className="cart--item flex items-start space-x-4 p-4 rounded-lg shadow"
           >
             {/* Product Image */}
             <div className="relative w-24 h-24 flex-shrink-0">
@@ -48,7 +48,7 @@ export default function CartPage() {
             {/* Product Details */}
             <div className="flex-grow">
               <h3 className="font-medium">{item.product.title}</h3>
-              <p className="text-gray-500 text-sm mb-2">{formatPrice(item.product.price)}</p>
+              <p className="text-sm mb-2">{formatPrice(item.product.price)}</p>
               
               {/* Quantity Controls */}
               <div className="flex items-center space-x-2">
@@ -67,7 +67,7 @@ export default function CartPage() {
                 </button>
                 <button
                   onClick={() => removeFromCart(item.product.id)}
-                  className="ml-4 text-red-500 hover:text-red-600"
+                  className="ml-4 text-red-500 hover:underline hover:text-red-600 cursor-pointer"
                 >
                   Remove
                 </button>
@@ -85,7 +85,7 @@ export default function CartPage() {
       </div>
 
       {/* Cart Summary */}
-      <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+      <div className="mt-8 p-4 rounded-lg">
         <div className="flex justify-between items-center mb-4">
           <span className="font-medium">Subtotal</span>
           <span className="font-bold text-xl">{formatPrice(cart.total)}</span>

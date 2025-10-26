@@ -35,7 +35,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div
       key={product.id}
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+      className="product--card rounded-lg shadow-md overflow-hidden"
     >
       {/* Product Image */}
       <div className="relative h-64 bg-gray-100">
@@ -57,11 +57,11 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* Product Info */}
       <div className="p-4">
-        <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
+        <h3 className="font-semibold mb-2 line-clamp-2">
           {truncateText(product.title, 60)}
         </h3>
         
-        <p className="text-sm text-gray-600 mb-2 capitalize">
+        <p className="text-sm mb-2 capitalize">
           <Link
             href={`/categories/${slugifyString(product.category)}`}
             className="hover:underline"
@@ -73,11 +73,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Rating */}
         {product.rating && (
           <div className="flex items-center gap-1 mb-3">
-            <span className="text-yellow-500">⭐</span>
-            <span className="text-sm text-gray-700">
+            <span>⭐</span>
+            <span className="text-sm">
               {product.rating.rate.toFixed(1)}
             </span>
-            <span className="text-xs text-gray-500">
+            <span className="text-xs">
               ({product.rating.count})
             </span>
           </div>
@@ -89,7 +89,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {formatPrice(product.price)}
           </span>
           {product.stock !== undefined && (
-            <span className="text-sm text-gray-600">
+            <span className="text-sm">
               Stock: {product.stock}
             </span>
           )}
