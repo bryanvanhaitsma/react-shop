@@ -9,8 +9,8 @@ export default function Checkout() {
   const { cart } = useCart();
   const [step, setStep] = useState(1);
   const [shippingInfo, setShippingInfo] = useState({
-    firstame: '',
-    lastame: '',
+    firstName: '',
+    lastName: '',
     address: '',
     city: '',
     zipCode: '',
@@ -79,6 +79,7 @@ export default function Checkout() {
   }
 
   // ACT: set up google address autocomplete
+  // ACT: set up tax if in Michigan
 
   return (
     <div className="container mx-auto py-10 px-4">
@@ -280,7 +281,7 @@ export default function Checkout() {
               <div className="mb-6 p-4 border rounded bg-gray-50">
                 <h3 className="font-medium mb-2">Shipping Address</h3>
                 <p>
-                  {shippingInfo.fullName}<br />
+                  {shippingInfo.firstName} {shippingInfo.lastName}<br />
                   {shippingInfo.address}<br />
                   {shippingInfo.city}, STATE {shippingInfo.zipCode}<br />
                   {shippingInfo.country}
