@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useCart } from '@/hooks/useCart';
 import { formatPrice } from '@/utils/formatters';
+import AddressAutocomplete, { AddressComponent } from '@/components/AddressAutoComplete';
+
 
 
 export default function Checkout() {
@@ -11,7 +13,7 @@ export default function Checkout() {
   const [shippingInfo, setShippingInfo] = useState({
     firstName: '',
     lastName: '',
-    address: '',
+    street: '',
     city: '',
     zipCode: '',
     country: '',
@@ -23,7 +25,24 @@ export default function Checkout() {
     cvv: '',
   });
 
-  console.log('Cart at checkout:', cart);
+
+  const handleAddressSelect = (addressData: {
+    fullAddress: string;
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country: string;
+  }) => {
+    setShippingInfo({
+      ...shippingInfo,
+      street: addressData.street,
+      city: addressData.city,
+      zipCode: addressData.zipCode,
+      country: addressData.country,
+    });
+  };
+
 
   const handleShippingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -156,14 +175,19 @@ export default function Checkout() {
           </div>
           
           <div className="mb-4">
-            <label className="block mb-2">Address</label>
-            <input 
+            <label className="block mb-2">Street</label>
+            <AddressAutocomplete 
+              apiKey={process.env.NEXT_PUBLIC_GEOAPIFY_API_KEY || ''}
+              onAddressSelect={handleAddressSelect}
+              placeholder="Start typing your address..."
+            />
+            {/* <input 
               type="text" 
               required
               value={shippingInfo.address}
               onChange={(e) => setShippingInfo({...shippingInfo, address: e.target.value})}
               className="w-full p-2 border rounded"
-            />
+            /> */}
           </div>
           
           <div className="grid grid-cols-2 gap-4">
@@ -199,9 +223,9 @@ export default function Checkout() {
               className="w-full p-2 border rounded"
             >
               <option value="">Select Country</option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-              <option value="MX">Mexico</option>
+              <option value="us">United States</option>
+              <option value="ca">Canada</option>
+              <option value="mx">Mexico</option>
             </select>
           </div>
           
@@ -282,7 +306,7 @@ export default function Checkout() {
                 <h3 className="font-medium mb-2">Shipping Address</h3>
                 <p>
                   {shippingInfo.firstName} {shippingInfo.lastName}<br />
-                  {shippingInfo.address}<br />
+                  {shippingInfo.street}<br />
                   {shippingInfo.city}, STATE {shippingInfo.zipCode}<br />
                   {shippingInfo.country}
                 </p>

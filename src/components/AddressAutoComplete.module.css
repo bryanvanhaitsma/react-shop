@@ -1,0 +1,51 @@
+.autocompleteContainer {
+  position: relative;
+  width: 100%;
+}
+
+.autocompleteInput {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+.suggestionsList {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
+  margin-top: 2px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.suggestionItem {
+  padding: 0.75rem;
+  cursor: pointer;
+}
+
+.suggestionItem:hover {
+  background-color: #f7fafc;
+}
+
+.loader {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 50%;
+  border-top-color: #4299e1;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
