@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useProducts } from '@/hooks/useProducts';
-import { ApiSource, SortOption, Product } from '@/types/Product';
+import { ApiSource, SortOption } from '@/types/Product';
 import ApiSourceFilter from '@/components/ApiSourceFilter';
 import ProductSort from '@/components/products/ProductSort';
 import HeaderSearch from '@/components/HeaderSearch';
