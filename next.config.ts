@@ -3,11 +3,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     domains: [
-      'fakestoreapi.com', 
+      'api.escuelajs.co',
       'cdn.dummyjson.com', 
-      'platzi.com', 
+      'fakestoreapi.com', 
       'i.imgur.com',
-      'api.escuelajs.co'
+      'i.pravatar.cc',
+      'platzi.com', 
+      'placehold.co',
+      'placeimg.com',
     ],
   },
 };
