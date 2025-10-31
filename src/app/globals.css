@@ -4,7 +4,13 @@
   --background-primary: #ffffff;
   --background-secondary: #f7f7f7;
   --background-secondary-alt: #e7e7e7;
+  --border-color: #cccccc;
   --font-color: #171717;
+
+  --button-fwd-bg-start: #82b0fa; 
+  --button-fwd-bg-end: #2563eb; 
+  --button-bk-bg-start: #f7f7f7;
+  --button-bk-bg-end: #cccccc;  
   --shadow-hover-1: rgba(0, 0, 0, 0.1);
   --shadow-hover-2: rgba(0, 0, 0, 0.04);
 }
@@ -14,7 +20,13 @@
     --background-primary: #0a0a0a;
     --background-secondary: #2a2a2a;
     --background-secondary-alt: #3a3a3a;
+    --border-color: #555555;
     --font-color: #ededed;
+
+    --button-fwd-bg-start: #2563eb;
+    --button-fwd-bg-end: #1e40af;
+    --button-bk-bg-start: #3a3a3a;
+    --button-bk-bg-end: #0a0a0a;
     --shadow-hover-1: rgba(255, 255, 255, 0.4);
     --shadow-hover-2: rgba(255, 255, 255, 0.6);
   }
@@ -56,4 +68,67 @@ footer {
 
 .cart--item:hover {
   background-color: var(--background-secondary-alt);
+}
+
+ /* =============== checkout ================== */
+
+.checkout--container {
+
+  input, select {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    border-color: #0070f3;
+    box-shadow: 0 0 0 1px #0070f3;
+  } 
+
+  button {
+    cursor: pointer;
+    transition: all 200ms, filter 150ms;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    color: white;
+    padding: 10px 20px;
+    font-weight: 500;
+
+    &.button--forward {
+      background: linear-gradient(180deg, var(--button-fwd-bg-start), var(--button-fwd-bg-end));
+
+      &:active {
+        transform: translateY(1px); 
+        filter: brightness(0.95);
+      }
+    }
+
+    &.button--back {
+      background: linear-gradient(180deg, var(--button-bk-bg-start), var(--button-bk-bg-end));
+      color: var(--font-color);
+
+      &:active {
+        background: linear-gradient(180deg, 
+                    var(--button-bk-bg-end), 
+                    var(--button-bk-bg-start)); 
+      }
+    }
+
+    &:hover {
+      filter: brightness(1.1); 
+      transform: translateY(-1px); 
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      filter: grayscale(40%);
+    }
+
+  }
+  
+  
+
+
 }

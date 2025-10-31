@@ -89,7 +89,7 @@ export default function Checkout() {
         <p>Add some items to your cart before checking out.</p>
         <button 
           onClick={() => alert('go back')}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="mt-4 px-4 py-2 text-white button--forward"
         >
           Continue Shopping
         </button>
@@ -97,24 +97,34 @@ export default function Checkout() {
     );
   }
 
+function getStepClassName(currentStep: number, stepNumber: number): string {
+
+  const baseClasses = "flex-1 text-center p-2";
+  
+  if (currentStep === stepNumber) {
+    return `${baseClasses} border-b-2 border-blue-500 text-blue-500 bg-blue-50`;
+  } else if (currentStep > stepNumber) {
+    return `${baseClasses} border-b-2 border-gray-300 text-gray-500 opacity-60`;
+  } else {
+    return `${baseClasses} text-gray-400 step--disabled`;
+  }
+}
+
+
+
+
   // ACT: set up google address autocomplete
   // ACT: set up tax if in Michigan
 
   return (
-    <div className="container mx-auto py-10 px-4">
+    <div className="container mx-auto py-10 px-4 checkout--container">
       <h1 className="text-2xl font-bold mb-4">Checkout</h1>
       
       {/* Progress indicator */}
       <div className="flex mb-8">
-        <div className={`flex-1 text-center pb-2 ${step >= 1 ? 'border-b-2 border-blue-500 text-blue-500' : ''}`}>
-          Review Cart
-        </div>
-        <div className={`flex-1 text-center pb-2 ${step >= 2 ? 'border-b-2 border-blue-500 text-blue-500' : ''}`}>
-          Shipping
-        </div>
-        <div className={`flex-1 text-center pb-2 ${step >= 3 ? 'border-b-2 border-blue-500 text-blue-500' : ''}`}>
-          Payment
-        </div>
+        <div className={getStepClassName(step, 1)}>Review Cart</div>
+        <div className={getStepClassName(step, 2)}>Shipping</div>
+        <div className={getStepClassName(step, 3)}>Payment</div>
       </div>
 
       {step === 1 && (
@@ -140,7 +150,7 @@ export default function Checkout() {
           
           <button 
             onClick={() => setStep(2)}
-            className="mt-6 w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="mt-6 w-full py-2 px-4 text-white button--forward"
           >
             Continue to Shipping
           </button>
@@ -159,7 +169,7 @@ export default function Checkout() {
                 required
                 value={shippingInfo.firstName}
                 onChange={(e) => setShippingInfo({...shippingInfo, firstName: e.target.value})}
-                className="w-full p-2 border rounded"
+                className="w-full p-2"
               />
             </div>
             <div className="mb-4">
@@ -169,7 +179,7 @@ export default function Checkout() {
                 required
                 value={shippingInfo.lastName}
                 onChange={(e) => setShippingInfo({...shippingInfo, lastName: e.target.value})}
-                className="w-full p-2 border rounded"
+                className="w-full p-2"
               />
             </div>
           </div>
@@ -198,7 +208,7 @@ export default function Checkout() {
                 required
                 value={shippingInfo.city}
                 onChange={(e) => setShippingInfo({...shippingInfo, city: e.target.value})}
-                className="w-full p-2 border rounded"
+                className="w-full p-2"
               />
             </div>
             
@@ -209,7 +219,7 @@ export default function Checkout() {
                 required
                 value={shippingInfo.zipCode}
                 onChange={(e) => setShippingInfo({...shippingInfo, zipCode: e.target.value})}
-                className="w-full p-2 border rounded"
+                className="w-full p-2"
               />
             </div>
           </div>
@@ -220,7 +230,7 @@ export default function Checkout() {
               required
               value={shippingInfo.country}
               onChange={(e) => setShippingInfo({...shippingInfo, country: e.target.value})}
-              className="w-full p-2 border rounded"
+              className="w-full p-2"
             >
               <option value="">Select Country</option>
               <option value="us">United States</option>
@@ -233,14 +243,14 @@ export default function Checkout() {
             <button 
               type="button"
               onClick={() => setStep(1)}
-              className="py-2 px-4 border rounded"
+              className="py-2 px-4 button--back"
               tabIndex={100}
             >
               Back
             </button>
             <button 
               type="submit"
-              className="py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="py-2 px-4 text-white button--forward"
             >
               Continue to Payment
             </button>
@@ -262,7 +272,7 @@ export default function Checkout() {
                   placeholder="1234 5678 9012 3456"
                   value={paymentInfo.cardNumber}
                   onChange={(e) => setPaymentInfo({...paymentInfo, cardNumber: e.target.value})}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2"
                 />
               </div>
               <div className="mb-4">
@@ -272,7 +282,7 @@ export default function Checkout() {
                   required
                   value={paymentInfo.cardName}
                   onChange={(e) => setPaymentInfo({...paymentInfo, cardName: e.target.value})}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -284,7 +294,7 @@ export default function Checkout() {
                     placeholder="MM/YY"
                     value={paymentInfo.expiry}
                     onChange={(e) => setPaymentInfo({...paymentInfo, expiry: e.target.value})}
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2"
                   />
                 </div>
                 <div className="mb-4">
@@ -295,7 +305,7 @@ export default function Checkout() {
                     placeholder="123"
                     value={paymentInfo.cvv}
                     onChange={(e) => setPaymentInfo({...paymentInfo, cvv: e.target.value})}
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2"
                   />
                 </div>
               </div>
@@ -332,14 +342,14 @@ export default function Checkout() {
             <button 
               type="button"
               onClick={() => setStep(2)}
-              className="py-2 px-4 border rounded"
+              className="py-2 px-4 border rounded button--back"
               tabIndex={100}
             >
               Back
             </button>
             <button 
               type="submit"
-              className="py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="py-2 px-4 text-white button--forward"
             >
               Place Order
             </button>
