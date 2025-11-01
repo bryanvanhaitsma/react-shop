@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useCart } from '@/hooks/useCart';
 import { formatPrice } from '@/utils/formatters';
 import AddressAutocomplete, { AddressComponent } from '@/components/AddressAutoComplete';
+import { US_STATES } from '../../../constants/us-states';
 
 
 
@@ -15,6 +16,7 @@ export default function Checkout() {
     lastName: '',
     street: '',
     city: '',
+    state: '',
     zipCode: '',
     country: '',
   });
@@ -34,10 +36,26 @@ export default function Checkout() {
     zipCode: string;
     country: string;
   }) => {
+
+    // Normalize the incoming state value so it matches the
+    // select option values (which are two-letter abbreviations).
+    const rawState = (addressData.state || '').trim();
+    let stateAbbr = '';
+
+    if (rawState) {
+      if (rawState.length === 2) {
+        stateAbbr = rawState.toUpperCase();
+      } else {
+        const match = US_STATES.find(s => s.name.toLowerCase() === rawState.toLowerCase() || s.abbreviation.toLowerCase() === rawState.toLowerCase());
+        stateAbbr = match ? match.abbreviation : '';
+      }
+    }
+
     setShippingInfo({
       ...shippingInfo,
       street: addressData.street,
       city: addressData.city,
+      state: stateAbbr,
       zipCode: addressData.zipCode,
       country: addressData.country,
     });
@@ -111,9 +129,6 @@ function getStepClassName(currentStep: number, stepNumber: number): string {
 }
 
 
-
-
-  // ACT: set up google address autocomplete
   // ACT: set up tax if in Michigan
 
   return (
@@ -200,7 +215,7 @@ function getStepClassName(currentStep: number, stepNumber: number): string {
             /> */}
           </div>
           
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <div className="mb-4">
               <label className="block mb-2">City</label>
               <input 
@@ -210,6 +225,24 @@ function getStepClassName(currentStep: number, stepNumber: number): string {
                 onChange={(e) => setShippingInfo({...shippingInfo, city: e.target.value})}
                 className="w-full p-2"
               />
+            </div>
+
+            <div className="mb-4">
+              <label className="block mb-2">State</label>
+              <select 
+                required
+                value={shippingInfo.state}
+                onChange={(e) => setShippingInfo({...shippingInfo, state: e.target.value})}
+                className="w-full p-2"
+              >
+                <option value="">Select State</option>
+                {US_STATES.map((state) => (
+                  <option key={state.abbreviation} value={state.abbreviation}>
+                    {state.name}
+                  </option>
+                ))}
+              </select>
+
             </div>
             
             <div className="mb-4">
@@ -317,7 +350,7 @@ function getStepClassName(currentStep: number, stepNumber: number): string {
                 <p>
                   {shippingInfo.firstName} {shippingInfo.lastName}<br />
                   {shippingInfo.street}<br />
-                  {shippingInfo.city}, STATE {shippingInfo.zipCode}<br />
+                  {shippingInfo.city}, {shippingInfo.state} {shippingInfo.zipCode}<br />
                   {shippingInfo.country}
                 </p>
               </div>
