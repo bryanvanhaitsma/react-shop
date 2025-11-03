@@ -23,7 +23,7 @@ export default async function CategoriesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <h1 className="text-2xl font-bold text-gray-900">Categories</h1>
         </div>
@@ -35,7 +35,7 @@ export default async function CategoriesPage() {
 
 
           {/* FakeStore Categories */}
-          <section className="bg-white rounded-lg shadow p-6">
+          <section className="rounded-lg shadow p-6">
             <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
               <span className="px-2 py-1 rounded text-sm font-semibold bg-blue-100 text-blue-800">FakeStore</span>
               <span className="text-sm text-gray-500">({fakeCategories.length})</span>
@@ -55,7 +55,7 @@ export default async function CategoriesPage() {
           </section>
 
           {/* DummyJSON Categories */}
-          <section className="bg-white rounded-lg shadow p-6">
+          <section className="rounded-lg shadow p-6">
             <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
               <span className="px-2 py-1 rounded text-sm font-semibold bg-green-100 text-green-800">DummyJSON</span>
               <span className="text-sm text-gray-500">({dummyCategories.length})</span>
@@ -75,7 +75,7 @@ export default async function CategoriesPage() {
           </section> 
 
           {/* Platzi Categories */}
-          <section className="bg-white rounded-lg shadow p-6">
+          <section className="rounded-lg shadow p-6">
             <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
               <span className="px-2 py-1 rounded text-sm font-semibold bg-purple-100 text-purple-800">Platzi</span>
               <span className="text-sm text-gray-500">({platziCategories.length})</span>
@@ -96,7 +96,7 @@ export default async function CategoriesPage() {
         </div>
 
         {/* All categories combined quick links */}
-        {/* <div className="mt-8 bg-white rounded-lg shadow p-6">
+        {/* <div className="mt-8 rounded-lg shadow p-6">
           <h3 className="text-lg font-semibold mb-4">All Categories</h3>
           <div className="flex flex-wrap gap-3">
             {Array.from(new Set([

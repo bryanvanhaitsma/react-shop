@@ -70,9 +70,9 @@ export default function CategoryPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link 
@@ -82,7 +82,7 @@ export default function CategoryPage({ params }: PageProps) {
               <ArrowLeft size={20} />
               <span className="font-semibold">Back to Products</span>
             </Link>
-            <h1 className="text-xl font-bold text-gray-900 capitalize">Category: {decodedCategory}</h1>
+            <h1 className="text-xl font-bold capitalize">Category: {decodedCategory}</h1>
             <HeaderCartButton />
           </div>
         </div>

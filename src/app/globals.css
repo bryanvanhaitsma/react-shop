@@ -6,6 +6,7 @@
   --background-secondary-alt: #e7e7e7;
   --border-color: #cccccc;
   --font-color: #171717;
+  --focus-color: #0070f3;
 
   --button-fwd-bg-start: #82b0fa; 
   --button-fwd-bg-end: #2563eb; 
@@ -22,6 +23,7 @@
     --background-secondary-alt: #3a3a3a;
     --border-color: #555555;
     --font-color: #ededed;
+    --focus-color: #3399ff  ;
 
     --button-fwd-bg-start: #2563eb;
     --button-fwd-bg-end: #1e40af;
@@ -38,6 +40,16 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+  
+}
+
 header {
   color: var(--font-color);
   background-color: var(--background-secondary);
@@ -45,6 +57,36 @@ header {
 
 main {
   color: var(--font-color);
+}
+
+#sort-select {
+  background-color: var(--background-secondary);
+  color: var(--font-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 5px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 1px #0070f3;
+  }
+
+}
+
+#header-search {
+  background-color: var(--background-primary);
+  color: var(--font-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 5px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 1px #0070f3;
+  }
+
 }
 
 footer {

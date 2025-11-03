@@ -83,7 +83,7 @@ export default function ProductDetailPage({ params }: PageProps) {
           <div className="flex items-center justify-between">
             <Link 
               href="/"
-              className="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition"
+              className="flex items-center gap-2 transition"
             >
               <ArrowLeft size={20} />
               <span className="font-semibold">Back to Products</span>

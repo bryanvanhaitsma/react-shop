@@ -10,6 +10,7 @@ interface HeaderSearchProps {
 export default function HeaderSearch({ value, onChange, placeholder = 'Search products...' }: HeaderSearchProps) {
   return (
     <input
+      id="header-search"
       type="search"
       value={value}
       onChange={(e) => onChange(e.target.value)}

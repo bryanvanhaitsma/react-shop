@@ -20,14 +20,14 @@ const sortOptions = [
 export default function ProductSort({ value, onChange }: ProductSortProps) {
   return (
     <div className="flex items-center gap-2">
-      <label htmlFor="sort" className="text-sm font-medium text-gray-700">
+      <label htmlFor="sort-select" className="text-sm font-medium">
         Sort by:
       </label>
       <select
-        id="sort"
+        id="sort-select"
         value={value}
         onChange={(e) => onChange(e.target.value as SortOption)}
-        className="block w-48 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+        className="block w-48 shadow-sm sm:text-sm"
       >
         {sortOptions.map((option) => (
           <option key={option.value} value={option.value}>
