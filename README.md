@@ -34,3 +34,27 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+# Features Demonstrated in This Application
+
+## Web Page Functionality
+
+* homepage 
+  * listing with filtering by source store API
+  * React search search
+* product detail
+* category listing
+* cart
+* checkout - using multi-step checkout functionality
+
+## Styling
+
+* use of Tailwind
+* use of centralized CSS in a custom global.css file
+
+## APIs
+
+* interacting with three different test store APIs to access product data
+* Geoapify API to autocomplete address form fill of data
+* Additionally API functionality is centralized in services folder for better code management
+
