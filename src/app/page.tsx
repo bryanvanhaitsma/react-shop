@@ -8,6 +8,8 @@ import ProductSort from '@/components/products/ProductSort';
 import HeaderSearch from '@/components/HeaderSearch';
 import HeaderCartButton from '@/components/ui/HeaderCartButton';
 import ProductCard from '@/components/products/ProductCard';
+import { useWishlist } from '@/context/WishListContext';
+import Link from 'next/link';
 
 
 export default function HomePage() {
@@ -15,6 +17,7 @@ export default function HomePage() {
   const [sortOption, setSortOption] = useState<SortOption>('price-desc');
   const [search, setSearch] = useState<string>('');
   const [debouncedSearch, setDebouncedSearch] = useState<string>('');
+  const { items } = useWishlist();
 
   // Debounce search input
   useEffect(() => {
@@ -65,6 +68,14 @@ export default function HomePage() {
             </h1>     
             <ApiSourceFilter selectedSource={selectedSource} onSourceChange={setSelectedSource} />
             <HeaderSearch value={search} onChange={setSearch} />
+            {items.length > 0 && (
+              <Link 
+                href="/wish-list/"
+                className="text-xs hover:underline"
+              >
+                wishlist
+              </Link>
+            )}
             <div className="relative">
               <HeaderCartButton />
             </div>

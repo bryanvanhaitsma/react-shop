@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import HeaderCartButton from '@/components/ui/HeaderCartButton';
 import Head from 'next/head';
+import WishlistButton from '@/components/WishListButton';
 
 interface PageProps {
   params: Promise<{
@@ -134,7 +135,7 @@ export default function ProductDetailPage({ params }: PageProps) {
             </div>
 
             {/* Right Column - Details */}
-            <div className="flex flex-col">
+            <div className="relative flex flex-col">
               {/* Category */}
               <p className="text-sm text-blue-600 font-semibold uppercase tracking-wide mb-2">
                 <Link
@@ -143,6 +144,12 @@ export default function ProductDetailPage({ params }: PageProps) {
                   {product.category}
                 </Link>
               </p>
+
+              <WishlistButton 
+                product={product} 
+                size="sm" 
+                className="absolute top-4 right-4 z-10"
+              />
 
               {/* Title */}
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">

@@ -58,3 +58,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 * Geoapify API to autocomplete address form fill of data
 * Additionally API functionality is centralized in services folder for better code management
 
+## Wish List 
+
+* use custom context
+* wish list functionality on product details and cards
+* various wishlist functions as part of custom hook
+* CSS styling and minor animation
