@@ -37,30 +37,31 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 # Features Demonstrated in This Application
 
-## Web Page Functionality
+This project is designed to showcase a compact, production-minded Next.js e-commerce demo suitable for a portfolio. The list below highlights the most important architecture, UX, and engineering choices made in the codebase.
 
-* homepage 
-  * listing with filtering by source store API
-  * React search search
-* product detail
-* category listing
-* cart
-* checkout - using multi-step checkout functionality
+- Core stack
+  - Next.js (App Router) + TypeScript for modern, file-based routing and strong typing.
+  - Tailwind CSS for utility-first, responsive styling with a small centralized global stylesheet for theme tokens and variables.
 
-## Styling
+- Component-driven architecture
+  - Reusable, focused React components (product cards, headers, buttons) and small presentational containers.
+  - Client and server boundaries are respected ("use client" where hooks/state are required).
 
-* use of Tailwind
-* use of centralized CSS in a custom global.css file
+- State & patterns
+  - Context + custom hooks (Cart, Wishlist) for local app state and composable logic.
+  - Services layer that centralizes API calls and keeps components thin.
 
-## APIs
+- UX, forms & accessibility
+  - Multi-step checkout flow with a clear progress indicator and keyboard/tab-order improvements.
+  - Address autocomplete integration (Geoapify) that populates the shipping form while keeping fields accessible and editable.
 
-* interacting with three different test store APIs to access product data
-* Geoapify API to autocomplete address form fill of data
-* Additionally API functionality is centralized in services folder for better code management
+- Data & integrations
+  - Integrates multiple external product APIs via a consolidated services folder so different sources can be consumed consistently.
 
-## Wish List 
+- Performance & polish
+  - Optimized image handling with `next/image` where appropriate and attention to layout stability (consistent card sizing, anchored footers).
+  - Small visual enhancements: gradients, subtle animations, and responsive grid layouts.
 
-* use custom context
-* wish list functionality on product details and cards
-* various wishlist functions as part of custom hook
-* CSS styling and minor animation
+- Developer experience
+  - TypeScript types for domain models, utility formatters, and small helpers for common tasks (slugify, truncate, price formatting).
+  - Minimal, easy-to-run project setup (npm/Yarn/pnpm) for local development and iteration.
