@@ -8,8 +8,7 @@ import { formatPrice, getSourceBadgeColor, slugifyString } from '@/utils/formatt
 import { ShoppingCart, ArrowLeft, Star, Package, Truck, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import HeaderCartButton from '@/components/ui/HeaderCartButton';
-import Head from 'next/head';
+import Header from '@/components/ui/Header';
 import WishlistButton from '@/components/WishListButton';
 
 interface PageProps {
@@ -24,7 +23,7 @@ export default function ProductDetailPage({ params }: PageProps) {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
-  const { addToCart, getItemCount } = useCart();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -78,21 +77,7 @@ export default function ProductDetailPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link 
-              href="/"
-              className="flex items-center gap-2 transition"
-            >
-              <ArrowLeft size={20} />
-              <span className="font-semibold">Back to Products</span>
-            </Link>
-            <HeaderCartButton />
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">

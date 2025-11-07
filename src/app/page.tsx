@@ -10,6 +10,7 @@ import HeaderCartButton from '@/components/ui/HeaderCartButton';
 import ProductCard from '@/components/products/ProductCard';
 import { useWishlist } from '@/context/WishListContext';
 import Link from 'next/link';
+import { Heart } from 'lucide-react';
 
 
 export default function HomePage() {
@@ -63,25 +64,28 @@ export default function HomePage() {
       <header className="shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold">
-              🛍️ E-Commerce Aggregator
-            </h1>     
-            <ApiSourceFilter selectedSource={selectedSource} onSourceChange={setSelectedSource} />
-            <HeaderSearch value={search} onChange={setSearch} />
-            {items.length > 0 && (
-              <Link 
-                href="/wish-list/"
-                className="text-xs hover:underline"
-              >
-                wishlist
-              </Link>
-            )}
-            <div className="relative">
+            <h1 className="text-2xl font-bold">🛍️ E-Commerce Aggregator</h1>     
+            <div className="relative flex flex-wrap gap-2">
+              {items.length > 0 && (
+                <Link 
+                  href="/wish-list/"
+                >
+                  <button
+                    className="flex gap-2 px-4 py-2 rounded-lg font-semibold transition text-white bg-gray-500"
+                  ><Heart size={20} />Wishlist</button>
+                </Link>
+              )}
               <HeaderCartButton />
             </div>
           </div>
         </div>
       </header>
+      <div className="bg-gray-100">
+        <div id="utily-tools" className="container mx-auto flex items-center justify-between px-4 py-2">
+          <HeaderSearch value={search} onChange={setSearch} />
+          <ApiSourceFilter selectedSource={selectedSource} onSourceChange={setSelectedSource} />
+        </div>
+      </div>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
