@@ -17,6 +17,7 @@ export default function HomePage() {
   const [selectedSource, setSelectedSource] = useState<ApiSource | null>(null);
   const [sortOption, setSortOption] = useState<SortOption>('price-desc');
   const [search, setSearch] = useState<string>('');
+  const [skip, setSkip] = useState<number>(0);
   const [debouncedSearch, setDebouncedSearch] = useState<string>('');
   const { items } = useWishlist();
 
@@ -27,12 +28,18 @@ export default function HomePage() {
   }, [search]);
 
   // pass filters, sorting, and search to useProducts
-  const { products, loading, error } = useProducts({
-    source: selectedSource || undefined,
-    sort: sortOption,
-    search: debouncedSearch || undefined,
-  });
+  const { products, loading, error } = useProducts(
+    {
+      source: selectedSource || undefined,
+      sort: sortOption,
+      search: debouncedSearch || undefined,
+    },
+    skip
+  );
 
+  function loadMore() {
+    setSkip((prevSkip) => prevSkip + 20); // Load 20 more products
+  }
 
 
 
@@ -112,6 +119,12 @@ export default function HomePage() {
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
+          <button 
+            onClick={loadMore}
+            className="col-span-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          >
+            Load More
+          </button>
         </div>
 
         {/* Empty State */}

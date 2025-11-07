@@ -32,9 +32,9 @@ interface DummyJsonCategory {
 
 export const dummyJsonApi = {
   // Get all products
-  getAllProducts: async (limit: number = 30): Promise<Product[]> => {
+  getAllProducts: async (limit: number = 30, skip: number = 0): Promise<Product[]> => {
     try {
-      const response = await axios.get(`${BASE_URL}/products?limit=${limit}`);
+      const response = await axios.get(`${BASE_URL}/products?limit=${limit}&skip=${skip}`);
       return response.data.products.map(normalizeProduct);
     } catch (error) {
       console.error('DummyJSON API Error:', error);

@@ -5,13 +5,14 @@ import { Product, ApiSource } from '@/types/Product';
 
 // Unified API service that aggregates all sources
 export const apiService = {
+
   // Get products from all sources
-  getAllProducts: async (): Promise<Product[]> => {
+  getAllProducts: async (limit: number = 30, skip: number = 0): Promise<Product[]> => {
     try {
       const [fakeStoreProducts, dummyJsonProducts, platziProducts] = await Promise.all([
         fakeStoreApi.getAllProducts(),
-        dummyJsonApi.getAllProducts(20), // Limit to 20 for performance
-        platziApi.getAllProducts(),  
+        dummyJsonApi.getAllProducts(limit, skip), // Limit to 20 for performance
+        platziApi.getAllProducts(20),  
       ]);
 
       return [...fakeStoreProducts, ...dummyJsonProducts, ...platziProducts];

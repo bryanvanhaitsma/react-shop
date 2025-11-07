@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Product, ProductFilters, ApiSource } from '@/types/Product';
 import { apiService } from '@/services/apiService';
 
-export const useProducts = (filters?: ProductFilters) => {
+export const useProducts = (filters?: ProductFilters, skip: number = 0) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +24,7 @@ export const useProducts = (filters?: ProductFilters) => {
           fetchedProducts = await apiService.searchProducts(filters.search);
         } else {
           // Default: fetch from all configured sources
-          fetchedProducts = await apiService.getAllProducts();
+          fetchedProducts = await apiService.getAllProducts(20, skip);
         }
 
         // Apply client-side filters
@@ -72,7 +72,7 @@ export const useProducts = (filters?: ProductFilters) => {
           });
         }
 
-        setProducts(filtered);
+        setProducts((products) => [...products, ...filtered]);
       } catch (err) {
         setError('Failed to fetch products. Please try again.');
         console.error('Error fetching products:', err);
@@ -82,7 +82,7 @@ export const useProducts = (filters?: ProductFilters) => {
     };
 
     fetchProducts();
-  }, [filters?.source, filters?.search, filters?.category, filters?.minPrice, filters?.maxPrice, filters?.sort]);
+  }, [filters?.source, filters?.search, filters?.category, filters?.minPrice, filters?.maxPrice, filters?.sort, skip]);
 
   return { products, loading, error };
 };
