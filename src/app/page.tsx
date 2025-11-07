@@ -10,7 +10,7 @@ import HeaderCartButton from '@/components/ui/HeaderCartButton';
 import ProductCard from '@/components/products/ProductCard';
 import { useWishlist } from '@/context/WishListContext';
 import Link from 'next/link';
-import { Heart } from 'lucide-react';
+import { Heart, SearchIcon } from 'lucide-react';
 
 
 export default function HomePage() {
@@ -70,11 +70,14 @@ export default function HomePage() {
                 <Link 
                   href="/wish-list/"
                 >
-                  <button
-                    className="flex gap-2 px-4 py-2 rounded-lg font-semibold transition text-white bg-gray-500"
-                  ><Heart size={20} />Wishlist</button>
+                  <button className="flex gap-2 px-4 py-2 rounded-lg font-semibold transition text-white bg-gray-500">
+                    <Heart size={20} />Wishlist
+                  </button>
                 </Link>
               )}
+              <button className="flex gap-2 px-4 py-2 rounded-lg font-semibold transition text-white bg-green-800">
+                <SearchIcon size={20} />
+              </button>
               <HeaderCartButton />
             </div>
           </div>

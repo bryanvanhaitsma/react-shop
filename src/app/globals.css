@@ -58,10 +58,34 @@ button {
   
 }
 
+
+ /* =============== header ================== */
+
 header {
   color: var(--font-color);
   background-color: var(--background-secondary);
 }
+
+
+#header-search {
+  background-color: var(--background-primary);
+  color: var(--font-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 5px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 1px #0070f3;
+  }
+
+}
+
+
+
+
+ /* =============== main ================== */
 
 main {
   color: var(--font-color);
@@ -82,20 +106,9 @@ main {
 
 }
 
-#header-search {
-  background-color: var(--background-primary);
-  color: var(--font-color);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  padding: 5px;
 
-  &:focus {
-    outline: none;
-    border-color: var(--focus-color);
-    box-shadow: 0 0 0 1px #0070f3;
-  }
 
-}
+/* =============== footer ================== */
 
 footer {
   background-color: #394c60;
