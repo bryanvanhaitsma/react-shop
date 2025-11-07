@@ -1,15 +1,11 @@
 'use client'
 
 import { useWishlist } from '@/context/WishListContext';
-import Link from 'next/link';
-import Image from 'next/image';
-import WishlistButton from '@/components/WishListButton';
 import { useRouter } from 'next/navigation';
-import { useCart } from '@/hooks/useCart';
+import ProductCard from '@/components/products/ProductCard';
 
 export default function WishlistPage() {
-  const { items, clearWishlist } = useWishlist();
-  const { addToCart } = useCart();
+  const { items, clearWishlist, addWishlistToCart } = useWishlist();
   const router = useRouter();
 
   if (items.length === 0) {
@@ -39,67 +35,18 @@ export default function WishlistPage() {
           >
             Clear All
           </button>
+          <button 
+            onClick={addWishlistToCart}
+            className="text-gray-500 hover:text-gray-700"
+          >
+            Add All to Cart
+          </button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {items.map(product => (
-          <div 
-            key={product.id} 
-            className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
-          >
-            {/* Product image with link */}
-            <Link href={`/product/${product.slug || product.id}`}>
-              <div className="relative h-48 bg-gray-100">
-                {product.image ? (
-                  <Image 
-                    src={product.image}
-                    alt={product.title}
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="flex items-center justify-center h-full text-gray-400">
-                    No image available
-                  </div>
-                )}
-              </div>
-            </Link>
-            
-            <div className="p-4">
-              <div className="flex justify-between">
-                <Link href={`/product/${product.slug || product.id}`}>
-                  <h3 className="font-medium text-gray-900 hover:text-blue-600 line-clamp-2">
-                    {product.title}
-                  </h3>
-                </Link>
-                <WishlistButton product={product} onlyIcon size="sm" />
-              </div>
-              
-              <div className="mt-2 text-lg font-semibold">${product.price.toFixed(2)}</div>
-              
-              <p className="mt-1 text-sm text-gray-500 line-clamp-2">
-                {product.description || 'No description available'}
-              </p>
-              
-              <div className="mt-4">
-                <button
-                  onClick={() => {
-                    addToCart({
-                      id: product.id,
-                      title: product.title,
-                      price: product.price,
-                      quantity: 1,
-                      image: product.image
-                    });
-                  }}
-                  className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>

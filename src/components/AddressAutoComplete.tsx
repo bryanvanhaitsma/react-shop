@@ -70,7 +70,7 @@ const AddressAutocomplete = ({
       }
       
       const data = await response.json();
-      console.log(data.results);
+      // console.log(data.results);
       setSuggestions(data.results || []);
       setShowSuggestions(data.results && data.results.length > 0);
     } catch (error) {

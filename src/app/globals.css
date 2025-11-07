@@ -50,6 +50,14 @@ a {
   
 }
 
+button {
+
+  &:hover {
+    cursor: pointer;
+  }
+  
+}
+
 header {
   color: var(--font-color);
   background-color: var(--background-secondary);

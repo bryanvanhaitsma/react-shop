@@ -6,4 +6,5 @@ export interface WishlistContextType {
   removeFromWishlist: (productId: string) => void;
   isInWishlist: (productId: string) => boolean;
   clearWishlist: () => void;
+  addWishlistToCart: () => void;
 }

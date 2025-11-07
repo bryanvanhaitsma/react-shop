@@ -21,9 +21,6 @@ const WishlistButton: React.FC<WishlistButtonProps> = ({
 }) => {
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const [isAnimating, setIsAnimating] = useState(false);
-
-    console.log('Product details page rendered for product:', product);
-
   const isWishlisted = isInWishlist(product.id);
 
   const handleToggleWishlist = (e: React.MouseEvent) => {
@@ -61,7 +58,7 @@ const WishlistButton: React.FC<WishlistButtonProps> = ({
       className={`
         flex items-center justify-center button--wishlist
         ${onlyIcon ? '' : 'px-3 py-2 rounded-full'}
-        ${isWishlisted ? 'text-red-500' : 'text-gray-500'} 
+        ${isWishlisted ? 'text-red-500' : 'text-gray-100'} 
         transition-all duration-300
         ${isAnimating ? 'scale-125' : 'scale-100'}
         ${className}
@@ -79,7 +76,7 @@ const WishlistButton: React.FC<WishlistButtonProps> = ({
         <path 
           strokeLinecap="round" 
           strokeLinejoin="round" 
-          strokeWidth={2} 
+          strokeWidth={1} 
           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
         />
       </svg>

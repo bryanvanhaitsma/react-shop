@@ -3,12 +3,14 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Product } from '@/types/Product';
 import { WishlistContextType } from '@/types/WishList';
+import { useCart } from '@/hooks/useCart';
 
 
 const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
 
 export const WishlistProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<Product[]>([]);
+  const { addToCart } = useCart();
 
   // Load wishlist from localStorage on mount
   useEffect(() => {
@@ -51,13 +53,26 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
     setItems([]);
   };
 
+  const addWishlistToCart = () => {
+
+    items.forEach(item => {
+      addToCart(item, 1);
+    });
+    clearWishlist();
+
+    // set notification that all items were added to cart
+    console.log('All wishlist items added to cart');
+
+  }
+
   return (
     <WishlistContext.Provider value={{ 
       items, 
       addToWishlist, 
       removeFromWishlist, 
       isInWishlist,
-      clearWishlist 
+      clearWishlist,
+      addWishlistToCart,
     }}>
       {children}
     </WishlistContext.Provider>
