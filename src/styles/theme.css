@@ -1,0 +1,35 @@
+/* Theme variables and color tokens */
+
+:root {
+  --background-primary: #ffffff;
+  --background-secondary: #f7f7f7;
+  --background-secondary-alt: #e7e7e7;
+  --border-color: #cccccc;
+  --font-color: #171717;
+  --focus-color: #0070f3;
+
+  --button-fwd-bg-start: #82b0fa; 
+  --button-fwd-bg-end: #2563eb; 
+  --button-bk-bg-start: #f7f7f7;
+  --button-bk-bg-end: #cccccc;  
+  --shadow-hover-1: rgba(0, 0, 0, 0.1);
+  --shadow-hover-2: rgba(0, 0, 0, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-primary: #0a0a0a;
+    --background-secondary: #2a2a2a;
+    --background-secondary-alt: #3a3a3a;
+    --border-color: #555555;
+    --font-color: #ededed;
+    --focus-color: #3399ff;
+
+    --button-fwd-bg-start: #2563eb;
+    --button-fwd-bg-end: #1e40af;
+    --button-bk-bg-start: #3a3a3a;
+    --button-bk-bg-end: #0a0a0a;
+    --shadow-hover-1: rgba(255, 255, 255, 0.4);
+    --shadow-hover-2: rgba(255, 255, 255, 0.6);
+  }
+}

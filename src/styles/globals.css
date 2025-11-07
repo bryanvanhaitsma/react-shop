@@ -1,0 +1,106 @@
+/* Global base styles and Tailwind import */
+
+@import "tailwindcss";
+@import "./theme.css";
+@import "./checkout.css";
+
+body {
+  background: var(--background-primary);
+  color: var(--font-color);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+/* =============== header ================== */
+
+header {
+  color: var(--font-color);
+  background-color: var(--background-secondary);
+}
+
+#header-search {
+  background-color: var(--background-primary);
+  color: var(--font-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 5px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 1px #0070f3;
+  }
+}
+
+/* =============== main ================== */
+
+main {
+  color: var(--font-color);
+}
+
+#sort-select {
+  background-color: var(--background-secondary);
+  color: var(--font-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 5px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 1px #0070f3;
+  }
+}
+
+/* =============== footer ================== */
+
+footer {
+  background-color: #394c60;
+  color: lightcyan
+}
+
+/* =============== product cards ================== */
+
+.product--card {
+  background-color: var(--background-secondary);
+  color: var(--font-color);
+  transition: box-shadow 300ms, background-color 300ms;
+}
+
+.product--card:hover {
+  box-shadow: 0 20px 25px -5px var(--shadow-hover-1), 0 10px 10px -5px var(--shadow-hover-2);
+}
+
+/* =============== cart ================== */
+
+.cart--item {
+  background-color: var(--background-secondary);
+}
+
+.cart--item:hover {
+  background-color: var(--background-secondary-alt);
+}
+
+/* =============== wishlist button ================== */
+
+.button--wishlist {
+  &:hover {
+    cursor: pointer;
+    filter: brightness(1.5);
+    /* transform: scale(1.2); */
+  }
+}
