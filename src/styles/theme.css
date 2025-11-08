@@ -4,8 +4,11 @@
   --background-primary: #ffffff;
   --background-secondary: #f7f7f7;
   --background-secondary-alt: #e7e7e7;
+  --background-photo: #f9f9f9; /* no dark mode specific color needed */
+
   --border-color: #cccccc;
   --font-color: #171717;
+  --font-color-alt: #333333;
   --focus-color: #0070f3;
 
   --button-fwd-bg-start: #82b0fa; 
@@ -23,6 +26,7 @@
     --background-secondary-alt: #3a3a3a;
     --border-color: #555555;
     --font-color: #ededed;
+    --font-color-alt: #cccccc;
     --focus-color: #3399ff;
 
     --button-fwd-bg-start: #2563eb;

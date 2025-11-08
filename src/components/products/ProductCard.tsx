@@ -40,7 +40,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       className="product--card rounded-lg shadow-md overflow-hidden flex flex-col h-full"
     >
       {/* Product Image */}
-      <div className="relative h-64">
+      <div className="relative h-64 product--photo">
         <Link href={`/product/${product.id}`} passHref>
           <Image  
             src={product.image}

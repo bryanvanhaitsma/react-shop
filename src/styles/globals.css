@@ -90,6 +90,10 @@ footer {
   box-shadow: 0 20px 25px -5px var(--shadow-hover-1), 0 10px 10px -5px var(--shadow-hover-2);
 }
 
+.product--photo {
+  background-color: var(--background-photo);  
+}
+
 /* =============== cart ================== */
 
 .cart--item {
@@ -108,4 +112,11 @@ footer {
     filter: brightness(1.5);
     /* transform: scale(1.2); */
   }
+}
+
+/* =============== product detail page ================== */
+
+.product--additional-info {
+  background-color: var(--background-secondary-alt);
+  color: var(--font-color-alt);
 }

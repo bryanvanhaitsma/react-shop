@@ -76,15 +76,15 @@ export default function ProductDetailPage({ params }: PageProps) {
   const images = [product.image, product.image, product.image];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <Header />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className="rounded-xl shadow-lg overflow-hidden">
           <div className="grid md:grid-cols-2 gap-8 p-6 md:p-8">
             <div>
-              <div className="relative bg-gray-100 rounded-lg mb-4 aspect-square flex items-center justify-center overflow-hidden">
+              <div className="relative rounded-lg mb-4 aspect-square flex items-center justify-center overflow-hidden product--photo">
                 <Image
                   src={images[selectedImage]}
                   alt={product.title}
@@ -96,6 +96,11 @@ export default function ProductDetailPage({ params }: PageProps) {
                     {product.source}
                   </span>
                 </div>
+                <WishlistButton 
+                  product={product} 
+                  size="md" 
+                  className="absolute top-4 left-4 z-10"
+                />
               </div>
 
               {/* Thumbnail Images */}
@@ -104,7 +109,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`flex-1 aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 transition ${
+                    className={`flex-1 aspect-square product--photo rounded-lg overflow-hidden border-2 transition ${
                       selectedImage === index ? 'border-blue-600' : 'border-transparent hover:border-gray-300'
                     }`}
                   >
@@ -130,14 +135,8 @@ export default function ProductDetailPage({ params }: PageProps) {
                 </Link>
               </p>
 
-              <WishlistButton 
-                product={product} 
-                size="sm" 
-                className="absolute top-4 right-4 z-10"
-              />
-
               {/* Title */}
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">
                 {product.title}
               </h1>
 
@@ -153,10 +152,10 @@ export default function ProductDetailPage({ params }: PageProps) {
                       />
                     ))}
                   </div>
-                  <span className="text-gray-700 font-semibold">
+                  <span className="font-semibold">
                     {product.rating.rate.toFixed(1)}
                   </span>
-                  <span className="text-gray-500">
+                  <span>
                     ({product.rating.count} reviews)
                   </span>
                 </div>
@@ -179,15 +178,15 @@ export default function ProductDetailPage({ params }: PageProps) {
               {/* Brand (if available) */}
               {product.brand && (
                 <div className="mb-4">
-                  <span className="text-gray-600">Brand: </span>
-                  <span className="font-semibold text-gray-900">{product.brand}</span>
+                  <span>Brand: </span>
+                  <span className="font-semibold">{product.brand}</span>
                 </div>
               )}
 
               {/* Description */}
               <div className="mb-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Description</h3>
-                <p className="text-gray-700 leading-relaxed">
+                <h3 className="text-lg font-bold mb-2">Description</h3>
+                <p className="leading-relaxed">
                   {product.description}
                 </p>
               </div>
@@ -243,13 +242,13 @@ export default function ProductDetailPage({ params }: PageProps) {
         </div>
 
         {/* Additional Info Tabs */}
-        <div className="bg-white rounded-xl shadow-lg mt-6 p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Product Information</h2>
+        <div className="rounded-xl shadow-lg mt-6 p-6 md:p-8 product--additional-info">
+          <h2 className="text-2xl font-bold mb-4">Product Information</h2>
           
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">Details</h3>
-              <ul className="space-y-2 text-gray-700">
+              <h3 className="font-bold mb-2">Details</h3>
+              <ul className="space-y-2">
                 <li><strong>Category:</strong> {product.category}</li>
                 <li><strong>Source:</strong> {product.source}</li>
                 {product.brand && <li><strong>Brand:</strong> {product.brand}</li>}
@@ -258,8 +257,8 @@ export default function ProductDetailPage({ params }: PageProps) {
             </div>
             
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">Shipping & Returns</h3>
-              <ul className="space-y-2 text-gray-700">
+              <h3 className="font-bold mb-2">Shipping & Returns</h3>
+              <ul className="space-y-2">
                 <li>✅ Free standard shipping on orders over $50</li>
                 <li>✅ 30-day return policy</li>
                 <li>✅ Secure checkout</li>

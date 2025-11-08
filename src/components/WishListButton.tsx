@@ -64,6 +64,7 @@ const WishlistButton: React.FC<WishlistButtonProps> = ({
         ${className}
       `}
       aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+      title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
     >
       {/* Heart icon - filled or outlined based on state */}
       <svg 

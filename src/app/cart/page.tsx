@@ -34,7 +34,7 @@ export default function CartPage() {
             className="cart--item flex items-start space-x-4 p-4 rounded-lg shadow"
           >
             {/* Product Image */}
-            <div className="relative w-24 h-24 flex-shrink-0">
+            <div className="relative w-24 h-24 flex-shrink-0 product--photo">
               <Link href={`/product/${item.product.id}`}>
                 <Image
                   src={item.product.image}
