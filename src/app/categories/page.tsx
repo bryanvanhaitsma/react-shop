@@ -5,7 +5,7 @@ import { dummyJsonApi } from '@/services/dummyJsonApi';
 import { platziApi } from '@/services/platziApi';
 import { getSourceBadgeColor } from '@/utils/formatters';
 import { slugifyString } from '@/utils/formatters';
-import HeaderCartButton from '@/components/ui/HeaderCartButton';
+import HeaderCartButtons from '@/components/ui/HeaderCartButtons';
 
 
 
@@ -22,12 +22,16 @@ export default async function CategoriesPage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
+      
       <header className="shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-gray-900">Categories</h1>
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex-1"></div>
+          <h1 className="text-xl font-bold capitalize">Categories</h1>
+          <div className="flex-1 flex justify-end">
+            <HeaderCartButtons />
+          </div>
         </div>
-        <HeaderCartButton />
       </header>
 
       <main className="container mx-auto px-4 py-8">

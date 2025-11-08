@@ -6,11 +6,8 @@ import { ApiSource, SortOption } from '@/types/Product';
 import ApiSourceFilter from '@/components/ApiSourceFilter';
 import ProductSort from '@/components/products/ProductSort';
 import HeaderSearch from '@/components/HeaderSearch';
-import HeaderCartButton from '@/components/ui/HeaderCartButton';
+import HeaderCartButtons from '@/components/ui/HeaderCartButtons';
 import ProductCard from '@/components/products/ProductCard';
-import { useWishlist } from '@/context/WishListContext';
-import Link from 'next/link';
-import { Heart, SearchIcon } from 'lucide-react';
 
 
 export default function HomePage() {
@@ -18,7 +15,7 @@ export default function HomePage() {
   const [sortOption, setSortOption] = useState<SortOption>('price-desc');
   const [search, setSearch] = useState<string>('');
   const [debouncedSearch, setDebouncedSearch] = useState<string>('');
-  const { items } = useWishlist();
+
 
   // Debounce search input
   useEffect(() => {
@@ -64,22 +61,8 @@ export default function HomePage() {
       <header className="shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold">🛍️ E-Commerce Aggregator</h1>     
-            <div className="relative flex flex-wrap gap-2">
-              {items.length > 0 && (
-                <Link 
-                  href="/wish-list/"
-                >
-                  <button className="flex gap-2 px-4 py-2 rounded-lg font-semibold transition text-white bg-gray-500">
-                    <Heart size={20} />Wishlist
-                  </button>
-                </Link>
-              )}
-              <button className="flex gap-2 px-4 py-2 rounded-lg font-semibold transition text-white bg-green-800">
-                <SearchIcon size={20} />
-              </button>
-              <HeaderCartButton />
-            </div>
+            <h1 className="text-2xl font-bold">🛍️ E-Commerce Aggregator</h1>         
+            <HeaderCartButtons />         
           </div>
         </div>
       </header>
