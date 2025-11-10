@@ -28,3 +28,27 @@
 ✅ Image gallery/carousel  
 ✅ Toast notifications  
 ✅ Skeleton loaders
+
+
+====
+Next steps
+
+Why:
+
+Builds on what you have - You already have search, sort, and source filtering. This extends it naturally.
+
+Most impressive for portfolio - Filtering with URL params shows you understand state management beyond just React state.
+
+Quick wins - You can implement it incrementally:
+
+Phase 1: Price range slider
+Phase 2: Multi-category checkboxes
+Phase 3: URL params
+Phase 4: Mobile drawer
+Demonstrates key skills:
+
+Complex state management
+URL/routing integration
+Performance optimization
+Accessibility (keyboard navigation for sliders)
+Responsive design
