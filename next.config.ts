@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
       'platzi.com', 
       'placehold.co',
       'placeimg.com',
+      'www.shutterstock.com',
     ],
   },
 };

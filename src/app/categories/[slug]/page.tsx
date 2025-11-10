@@ -3,11 +3,11 @@
 import { use, useState, useEffect } from 'react';
 import { apiService } from '@/services/apiService';
 import { Product } from '@/types/Product';
-import { ShoppingCart, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { useCart } from '@/hooks/useCart';
 import ProductCard from '@/components/products/ProductCard';
-import HeaderCartButtons from '@/components/ui/HeaderCartButtons';
+import Header from '@/components/ui/Header';
+
 
 interface PageProps {
   params: Promise<{
@@ -15,11 +15,13 @@ interface PageProps {
   }>;
 }
 
+
+
+
 export default function CategoryPage({ params }: PageProps) {
   const { slug } = use(params);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useCart();
   const decodedCategory = decodeURIComponent(slug);
 
   useEffect(() => {
@@ -71,27 +73,12 @@ export default function CategoryPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <header className="shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex-1">
-             <Link 
-              href="/categories/"
-              className="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition"
-            >
-              <ArrowLeft size={20} />
-              <span className="font-semibold">All Categories</span>
-            </Link>
-          </div>
-          <h1 className="text-xl font-bold capitalize">Category: {decodedCategory}</h1>
-          <div className="flex-1 flex justify-end">
-            <HeaderCartButtons />
-          </div>
-        </div>
-      </header>
+      
+      <Header />      
 
       {/* Product Grid */}
       <main className="container mx-auto px-4 py-8">
+        <h1>Category: {decodedCategory}</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />

@@ -6,8 +6,8 @@ import { ApiSource, SortOption } from '@/types/Product';
 import ApiSourceFilter from '@/components/ApiSourceFilter';
 import ProductSort from '@/components/products/ProductSort';
 import HeaderSearch from '@/components/HeaderSearch';
-import HeaderCartButtons from '@/components/ui/HeaderCartButtons';
 import ProductCard from '@/components/products/ProductCard';
+import Header from '@/components/ui/Header';
 
 
 export default function HomePage() {
@@ -58,14 +58,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold">🛍️ E-Commerce Aggregator</h1>         
-            <HeaderCartButtons />         
-          </div>
-        </div>
-      </header>
+      <Header />
       <div className="bg-gray-100">
         <div id="utily-tools" className="container mx-auto flex items-center justify-between px-4 py-2">
           <HeaderSearch value={search} onChange={setSearch} />

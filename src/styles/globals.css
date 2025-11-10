@@ -35,6 +35,16 @@ button {
 header {
   color: var(--font-color);
   background-color: var(--background-secondary);
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+  }
+
 }
 
 #header-search {
@@ -55,6 +65,15 @@ header {
 
 main {
   color: var(--font-color);
+}
+
+h1 {
+  text-align: center;
+  margin: auto 20px;
+  font-size: xx-large;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin: 20px 0;
 }
 
 #sort-select {

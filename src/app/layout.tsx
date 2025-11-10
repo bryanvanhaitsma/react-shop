@@ -6,10 +6,10 @@ import '@/styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'E-Commerce Aggregator',
-  description: 'Compare products from multiple stores',
-};
+// export const metadata: Metadata = {
+//   title: 'E-Commerce Aggregator',
+//   description: 'Compare products from multiple stores',
+// };
 
 export default function RootLayout({
   children,
