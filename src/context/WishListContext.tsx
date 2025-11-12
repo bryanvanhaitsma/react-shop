@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 import { Product } from '@/types/Product';
 import { WishlistContextType } from '@/types/WishList';
 import { useCart } from '@/hooks/useCart';
@@ -11,6 +12,7 @@ const WishlistContext = createContext<WishlistContextType | undefined>(undefined
 export const WishlistProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<Product[]>([]);
   const { addToCart } = useCart();
+  const router = useRouter();
 
   // Load wishlist from localStorage on mount
   useEffect(() => {
@@ -41,11 +43,11 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const removeFromWishlist = (productId: number) => {
+  const removeFromWishlist = (productId: string) => {
     setItems(prevItems => prevItems.filter(item => item.id !== productId));
   };
 
-  const isInWishlist = (productId: number) => {
+  const isInWishlist = (productId: string) => {
     return items.some(item => item.id === productId);
   };
 
@@ -59,9 +61,13 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
       addToCart(item, 1);
     });
     clearWishlist();
-
-    // set notification that all items were added to cart
-    console.log('All wishlist items added to cart');
+    
+    try {
+      router.push('/cart');
+    } catch (err) {
+      // In case router isn't available for some environment, fail silently
+      console.warn('Navigation to /cart failed', err);
+    }
 
   }
 

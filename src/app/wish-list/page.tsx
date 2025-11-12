@@ -4,6 +4,7 @@ import { useWishlist } from '@/context/WishListContext';
 import { useRouter } from 'next/navigation';
 import ProductCard from '@/components/products/ProductCard';
 import Header from '@/components/ui/Header';
+import Link from 'next/link';
 
 export default function WishlistPage() {
   const { items, clearWishlist, addWishlistToCart } = useWishlist();
@@ -39,12 +40,6 @@ export default function WishlistPage() {
               >
               Clear All
             </button>
-            <button 
-              onClick={addWishlistToCart}
-              className="text-gray-500 hover:text-gray-700"
-              >
-              Add All to Cart
-            </button>
           </div>
         </div>
 
@@ -52,6 +47,15 @@ export default function WishlistPage() {
           {items.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
+        </div>
+
+        <div className="flex justify-center mt-8">
+          <button 
+            onClick={addWishlistToCart}
+            className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+          >
+            Add All to Cart
+          </button>
         </div>
 
       </div>

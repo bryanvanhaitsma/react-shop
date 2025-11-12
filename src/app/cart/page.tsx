@@ -90,11 +90,13 @@ export default function CartPage() {
           <span className="font-medium">Subtotal</span>
           <span className="font-bold text-xl">{formatPrice(cart.total)}</span>
         </div>
-        <Link href="/checkout/">
-          <button className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-            Proceed to Checkout
-          </button>
-        </Link>
+        <div className="flex justify-center">
+          <Link href="/checkout/">
+            <button className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+              Proceed to Checkout
+            </button>
+          </Link>
+        </div>
       </div>
 
       <Link
