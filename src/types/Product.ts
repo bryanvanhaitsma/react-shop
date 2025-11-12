@@ -25,6 +25,11 @@ export interface ProductFilters {
   search?: string;
   source?: ApiSource;
   sort?: SortOption;
+  // Advanced filters
+  priceRange?: [number, number];
+  categories?: string[];
+  minRating?: number;
+  inStockOnly?: boolean;
 }
 
 export type ApiProduct = Record<string, unknown>;

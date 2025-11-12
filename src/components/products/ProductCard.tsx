@@ -50,7 +50,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           />
         </Link>
         {/* Source Badge */}
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-2 left-2">
           <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getSourceBadgeColor(product.source)}`}>
             {product.source}
           </span>
@@ -58,6 +58,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <WishlistButton 
           product={product} 
           size='sm'
+          className='absolute top-2 right-2'
         />
       </div>
 

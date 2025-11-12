@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Product, ProductFilters, ApiSource } from '@/types/Product';
+import { Product, ProductFilters } from '@/types/Product';
 import { apiService } from '@/services/apiService';
 
 export const useProducts = (filters?: ProductFilters) => {
@@ -44,6 +44,37 @@ export const useProducts = (filters?: ProductFilters) => {
           filtered = filtered.filter((product) => product.price <= filters.maxPrice!);
         }
 
+        // Advanced filters
+        if (filters?.priceRange) {
+          filtered = filtered.filter(
+            (product) => 
+              product.price >= filters.priceRange![0] && 
+              product.price <= filters.priceRange![1]
+          );
+        }
+
+        if (filters?.categories && filters.categories.length > 0) {
+          filtered = filtered.filter((product) =>
+            filters.categories!.some(cat => 
+              product.category.toLowerCase() === cat.toLowerCase()
+            )
+          );
+        }
+
+        if (filters?.minRating !== undefined && filters.minRating > 0) {
+          filtered = filtered.filter((product) => {
+            const rating = product.rating?.rate ?? 0;
+            return rating >= filters.minRating!;
+          });
+        }
+
+        if (filters?.inStockOnly) {
+          filtered = filtered.filter((product) => {
+            // If stock is undefined, assume it's in stock
+            return product.stock === undefined || product.stock > 0;
+          });
+        }
+
         // Apply sorting
         if (filters?.sort) {
           filtered = [...filtered].sort((a, b) => {
@@ -82,7 +113,18 @@ export const useProducts = (filters?: ProductFilters) => {
     };
 
     fetchProducts();
-  }, [filters?.source, filters?.search, filters?.category, filters?.minPrice, filters?.maxPrice, filters?.sort]);
+  }, [
+    filters?.source, 
+    filters?.search, 
+    filters?.category, 
+    filters?.minPrice, 
+    filters?.maxPrice, 
+    filters?.sort,
+    filters?.priceRange,
+    filters?.categories,
+    filters?.minRating,
+    filters?.inStockOnly
+  ]);
 
   return { products, loading, error };
 };
