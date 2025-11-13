@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link'; 
 import { formatPrice, getSourceBadgeColor, slugifyString, truncateText } from '@/utils/formatters';
 import { useCart } from '@/hooks/useCart';
 import { Product } from '@/types/Product';
 import WishlistButton from '../WishListButton';
+import { APPROVED_IMAGE_DOMAINS } from '../../../next.config';
 
 
 interface ProductCardProps {
@@ -15,7 +16,23 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const [animatingButtons, setAnimatingButtons] = useState<Record<string, boolean>>({});
+  const [imageError, setImageError] = useState(true);
   const { addToCart } = useCart();
+
+
+  useEffect(() => {
+    try {
+      const url = new URL(product.image);
+      console.log("testing", APPROVED_IMAGE_DOMAINS.includes(url.hostname));
+      if (APPROVED_IMAGE_DOMAINS.includes(url.hostname)) {
+        setImageError(false);
+      }
+
+    } catch (error) {
+      setImageError(true);
+      console.error('Invalid image URL:', error);
+    }
+  }, [product.image]);
 
 
   const handleAddToCart = (product: Product) => {
@@ -42,12 +59,34 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Product Image */}
       <div className="relative h-64 product--photo">
         <Link href={`/product/${product.id}`} passHref>
-          <Image  
-            src={product.image}
-            alt={product.title}
-            className="w-full h-full object-contain p-4"
-            fill 
-          />
+          {!imageError ? (
+            <Image  
+              src={product.image}
+              alt={product.title}
+              className="w-full h-full object-contain p-4"
+              fill
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gray-100">
+              <div className="text-center p-4">
+                <svg
+                  className="mx-auto h-12 w-12 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <p className="text-sm text-gray-500 mt-2">Image unavailable</p>
+              </div>
+            </div>
+          )}
         </Link>
         {/* Source Badge */}
         <div className="absolute top-2 left-2">
