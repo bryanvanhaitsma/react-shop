@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import PriceRangeSlider from '../ui/PriceRangeSlider';
+
 
 interface PriceRangeFilterProps {
   min: number;
@@ -11,26 +13,27 @@ interface PriceRangeFilterProps {
 
 export default function PriceRangeFilter({ min, max, currentRange, onChange }: PriceRangeFilterProps) {
   const [localRange, setLocalRange] = useState<[number, number]>(currentRange);
+  console.log(min, max, currentRange);
 
   useEffect(() => {
     setLocalRange(currentRange);
   }, [currentRange]);
 
-  const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newMin = Number(e.target.value);
-    if (newMin > 0 && newMin <= localRange[1]) {
-      const newRange: [number, number] = [newMin, localRange[1]];
-      setLocalRange(newRange);
-    }
-  };
+  // const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const newMin = Number(e.target.value);
+  //   if (newMin > 0 && newMin <= localRange[1]) {
+  //     const newRange: [number, number] = [newMin, localRange[1]];
+  //     setLocalRange(newRange);
+  //   }
+  // };
 
-  const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newMax = Number(e.target.value);
-    if (newMax >= localRange[0] && newMax <= max) {
-      const newRange: [number, number] = [localRange[0], newMax];
-      setLocalRange(newRange);
-    }
-  };
+  // const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const newMax = Number(e.target.value);
+  //   if (newMax >= localRange[0] && newMax <= max) {
+  //     const newRange: [number, number] = [localRange[0], newMax];
+  //     setLocalRange(newRange);
+  //   }
+  // };
 
   const handleApply = () => {
     onChange(localRange);
@@ -45,55 +48,14 @@ export default function PriceRangeFilter({ min, max, currentRange, onChange }: P
   return (
     <div className="space-y-3">
       <h3 className="font-semibold text-sm uppercase tracking-wide">Price Range</h3>
-      
-      <div className="space-y-2">
-        {/* Min slider */}
-        <div>
-          <label className="text-xs text-gray-600 block mb-1">Min: ${localRange[0]}</label>
-          <input
-            type="range"
-            min={min}
-            max={max}
-            value={localRange[0]}
-            onChange={handleMinChange}
-            className="w-full accent-blue-600"
-          />
-        </div>
-        
-        {/* Max slider */}
-        <div>
-          <label className="text-xs text-gray-600 block mb-1">Max: ${localRange[1]}</label>
-          <input
-            type="range"
-            min={min}
-            max={max}
-            value={localRange[1]}
-            onChange={handleMaxChange}
-            className="w-full accent-blue-600"
-          />
-        </div>
-      </div>
 
-      {/* Price inputs */}
-      <div className="flex gap-2 items-center">
-        <input
-          type="number"
-          min={min}
-          max={max}
-          value={localRange[0]}
-          onChange={handleMinChange}
-          className="w-20 px-2 py-1 border rounded text-sm"
-        />
-        <span className="text-gray-500">-</span>
-        <input
-          type="number"
-          min={min}
-          max={max}
-          value={localRange[1]}
-          onChange={handleMaxChange}
-          className="w-20 px-2 py-1 border rounded text-sm"
-        />
-      </div>
+      <PriceRangeSlider
+        min={min}
+        max={max}
+        defaultRange={[localRange[0], localRange[1]]}
+        onChange={setLocalRange}
+      />
+
 
       {/* Action buttons */}
       <div className="flex gap-2 pt-2">

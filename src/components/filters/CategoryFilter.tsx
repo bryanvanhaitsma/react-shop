@@ -44,7 +44,7 @@ export default function CategoryFilter({
         {categories.map((category) => (
           <label
             key={category}
-            className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded"
+            className="flex items-center gap-2 cursor-pointer p-2 rounded"
           >
             <input
               type="checkbox"

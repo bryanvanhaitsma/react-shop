@@ -37,7 +37,7 @@ export default function WishlistPage() {
             <button 
               onClick={clearWishlist}
               className="text-gray-500 hover:text-gray-700"
-              >
+            >
               Clear All
             </button>
           </div>

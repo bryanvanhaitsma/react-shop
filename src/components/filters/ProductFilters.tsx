@@ -59,7 +59,7 @@ export default function ProductFilters({
     filters.priceRange[1] !== priceRange[1];
 
   return (
-    <div className="bg-white border rounded-lg p-4 space-y-6">
+    <div className="bg-white dark:bg-gray-800 border rounded-lg p-4 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between pb-3 border-b">
         <h2 className="text-lg font-bold">Filters</h2>

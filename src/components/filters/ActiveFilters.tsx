@@ -39,9 +39,9 @@ export default function ActiveFilters({
     filters.priceRange[1] !== priceRange[1];
 
   return (
-    <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+    <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-sm font-semibold text-gray-700">Active Filters:</span>
+        <span className="text-sm font-semibold">Active Filters:</span>
         <button
           onClick={onClearAll}
           className="text-xs text-blue-600 hover:underline"
