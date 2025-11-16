@@ -67,7 +67,7 @@ export default function PriceRangeFilter({ min, max, currentRange, onChange }: P
         </button>
         <button
           onClick={handleReset}
-          className="px-3 py-1.5 border rounded text-sm hover:bg-gray-50"
+          className="px-3 py-1.5 rounded text-sm btn--reset"
         >
           Reset
         </button>

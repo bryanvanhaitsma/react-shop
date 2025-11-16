@@ -90,6 +90,36 @@ h1 {
   }
 }
 
+.filter--container {
+  background-color: var(--background-secondary);
+  color: var(--font-color);
+  border: 1px solid var(--border-color);
+
+  .btn--reset {
+    background-color: var(--background-secondary-alt);
+    color: var(--font-color);
+
+    &:hover {
+      background-color: var(--background-primary);  
+    }
+  }
+
+  .stars--filter {
+    label {
+      &:hover {
+        background-color: var(--background-secondary-alt);
+      }
+    }
+  }
+
+}
+
+.price--filter {
+  background-color: var(--background-secondary);
+  color: var(--font-color);
+  border: 1px solid var(--border-color);
+}
+
 /* =============== footer ================== */
 
 footer {

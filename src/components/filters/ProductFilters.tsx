@@ -59,7 +59,7 @@ export default function ProductFilters({
     filters.priceRange[1] !== priceRange[1];
 
   return (
-    <div className="bg-white dark:bg-gray-800 border rounded-lg p-4 space-y-6">
+    <div className="rounded-lg p-6 space-y-6 filter--container">
       {/* Header */}
       <div className="flex items-center justify-between pb-3 border-b">
         <h2 className="text-lg font-bold">Filters</h2>
@@ -96,11 +96,11 @@ export default function ProductFilters({
       {/* Rating Filter */}
       <div className="space-y-3">
         <h3 className="font-semibold text-sm uppercase tracking-wide">Minimum Rating</h3>
-        <div className="space-y-2">
+        <div className="space-y-2 stars--filter">
           {[4, 3, 2, 1, 0].map((rating) => (
             <label
               key={rating}
-              className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded"
+              className="flex items-center gap-2 cursor-pointer p-2 rounded"
             >
               <input
                 type="radio"

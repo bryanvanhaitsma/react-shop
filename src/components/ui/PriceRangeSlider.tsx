@@ -67,11 +67,11 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
 
       {/* Price display */}
       <div className="flex justify-between items-center">
-        <div className="px-3 py-1 bg-gray-100 rounded-md">
+        <div className="px-3 py-1 rounded-md price--filter">
           <span className="text-sm font-medium">{formatPrice(range[0])}</span>
         </div>
         <div className="text-gray-400 text-sm px-2">to</div>
-        <div className="px-3 py-1 bg-gray-100 rounded-md">
+        <div className="px-3 py-1 rounded-md price--filter">
           <span className="text-sm font-medium">{formatPrice(range[1])}</span>
         </div>
       </div>
