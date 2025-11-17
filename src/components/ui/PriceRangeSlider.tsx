@@ -7,6 +7,7 @@ import { formatPrice } from '@/utils/formatters';
 interface PriceRangeSliderProps {
   min: number;
   max: number;
+  step: number;
   defaultRange?: [number, number];
   onChange?: (range: [number, number]) => void;
   className?: string;
@@ -15,6 +16,7 @@ interface PriceRangeSliderProps {
 const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
   min,
   max,
+  step,
   defaultRange = [min, max],
   onChange,
   className = ''
@@ -46,7 +48,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
           min={min}
           max={max}
           value={range}
-          step={10}
+          step={step}
           onChange={handleChange}
           allowCross={false}
           pushable={5} // Minimum distance between handles

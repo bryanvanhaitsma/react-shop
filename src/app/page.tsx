@@ -18,7 +18,7 @@ export default function HomePage() {
   const [search, setSearch] = useState<string>('');
   const [debouncedSearch, setDebouncedSearch] = useState<string>('');
   const [filters, setFilters] = useState<FilterValues>({
-    priceRange: [1, 5000],
+    priceRange: [0, 0],
     categories: [],
     minRating: 0,
     inStockOnly: false,
@@ -31,7 +31,7 @@ export default function HomePage() {
   }, [search]);
 
   // pass filters, sorting, and search to useProducts
-  const { products, loading, error } = useProducts({
+  const { products, allProducts, loading, error } = useProducts({
     source: selectedSource || undefined,
     sort: sortOption,
     search: debouncedSearch || undefined,
@@ -41,30 +41,34 @@ export default function HomePage() {
     inStockOnly: filters.inStockOnly,
   });
 
-  // Calculate available categories and price range from products
+  // Calculate available categories and price range from ALL products (not filtered)
   const { availableCategories, categoryCounts, priceRange } = useMemo(() => {
     const categories = new Set<string>();
     const counts: Record<string, number> = {};
     let minPrice = Infinity;
     let maxPrice = 0;
 
-    products.forEach((product: Product) => {
+    allProducts.forEach((product: Product) => {
       categories.add(product.category);
       counts[product.category] = (counts[product.category] || 0) + 1;
       if (product.price < minPrice) minPrice = product.price;
       if (product.price > maxPrice) maxPrice = product.price;
     });
 
+    // Round min down to nearest dollar, max up to nearest $100
+    const roundedMin = Math.floor(minPrice);
+    const roundedMax = Math.ceil(maxPrice / 100) * 100;
+
     return {
       availableCategories: Array.from(categories).sort(),
       categoryCounts: counts,
-      priceRange: [Math.floor(minPrice), Math.ceil(maxPrice)] as [number, number],
+      priceRange: [roundedMin, roundedMax] as [number, number],
     };
-  }, [products]);
+  }, [allProducts]);
 
   // Initialize price range filter when products load
   useEffect(() => {
-    if (priceRange[0] !== Infinity && filters.priceRange[0] === 0 && filters.priceRange[1] === 1000) {
+    if (priceRange[0] !== Infinity && filters.priceRange[1] === 0) {
       setFilters(prev => ({ ...prev, priceRange }));
     }
   }, [priceRange, filters.priceRange]);

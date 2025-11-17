@@ -19,22 +19,6 @@ export default function PriceRangeFilter({ min, max, currentRange, onChange }: P
     setLocalRange(currentRange);
   }, [currentRange]);
 
-  // const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const newMin = Number(e.target.value);
-  //   if (newMin > 0 && newMin <= localRange[1]) {
-  //     const newRange: [number, number] = [newMin, localRange[1]];
-  //     setLocalRange(newRange);
-  //   }
-  // };
-
-  // const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const newMax = Number(e.target.value);
-  //   if (newMax >= localRange[0] && newMax <= max) {
-  //     const newRange: [number, number] = [localRange[0], newMax];
-  //     setLocalRange(newRange);
-  //   }
-  // };
-
   const handleApply = () => {
     onChange(localRange);
   };
@@ -52,10 +36,10 @@ export default function PriceRangeFilter({ min, max, currentRange, onChange }: P
       <PriceRangeSlider
         min={min}
         max={max}
+        step={100}
         defaultRange={[localRange[0], localRange[1]]}
         onChange={setLocalRange}
       />
-
 
       {/* Action buttons */}
       <div className="flex gap-2 pt-2">

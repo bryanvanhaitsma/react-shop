@@ -6,6 +6,7 @@ import { apiService } from '@/services/apiService';
 
 export const useProducts = (filters?: ProductFilters) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,6 +27,9 @@ export const useProducts = (filters?: ProductFilters) => {
           // Default: fetch from all configured sources
           fetchedProducts = await apiService.getAllProducts();
         }
+
+        // Store unfiltered products for price range calculation
+        setAllProducts(fetchedProducts);
 
         // Apply client-side filters
         let filtered = fetchedProducts;
@@ -126,5 +130,5 @@ export const useProducts = (filters?: ProductFilters) => {
     filters?.inStockOnly
   ]);
 
-  return { products, loading, error };
+  return { products, allProducts, loading, error };
 };
