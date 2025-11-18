@@ -13,7 +13,6 @@ interface PriceRangeFilterProps {
 
 export default function PriceRangeFilter({ min, max, currentRange, onChange }: PriceRangeFilterProps) {
   const [localRange, setLocalRange] = useState<[number, number]>(currentRange);
-  console.log(min, max, currentRange);
 
   useEffect(() => {
     setLocalRange(currentRange);

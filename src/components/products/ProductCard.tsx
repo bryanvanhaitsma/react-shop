@@ -23,7 +23,6 @@ export default function ProductCard({ product }: ProductCardProps) {
   useEffect(() => {
     try {
       const url = new URL(product.image);
-      console.log("testing", APPROVED_IMAGE_DOMAINS.includes(url.hostname));
       if (APPROVED_IMAGE_DOMAINS.includes(url.hostname)) {
         setImageError(false);
       }
