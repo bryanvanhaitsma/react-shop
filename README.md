@@ -65,3 +65,6 @@ This project is designed to showcase a compact, production-minded Next.js e-comm
 - Developer experience
   - TypeScript types for domain models, utility formatters, and small helpers for common tasks (slugify, truncate, price formatting).
   - Minimal, easy-to-run project setup (npm/Yarn/pnpm) for local development and iteration.
+
+- Unit Tests
+  - Built unit tests using Vitest to ensure more reliable code 
