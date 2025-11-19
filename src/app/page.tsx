@@ -164,6 +164,7 @@ export default function HomePage() {
               categoryCounts={categoryCounts}
               priceRange={priceRange}
               onFilterChange={handleFilterChange}
+              allProducts={allProducts}
             />
           </aside>
 

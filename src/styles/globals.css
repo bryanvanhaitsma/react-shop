@@ -95,20 +95,18 @@ h1 {
   color: var(--font-color);
   border: 1px solid var(--border-color);
 
+  label {
+    &:hover {
+      background-color: var(--background-secondary-alt);
+    }
+  }
+
   .btn--reset {
     background-color: var(--background-secondary-alt);
     color: var(--font-color);
 
     &:hover {
-      background-color: var(--background-primary);  
-    }
-  }
-
-  .stars--filter {
-    label {
-      &:hover {
-        background-color: var(--background-secondary-alt);
-      }
+      background-color: var(--background-secondary-alt);
     }
   }
 

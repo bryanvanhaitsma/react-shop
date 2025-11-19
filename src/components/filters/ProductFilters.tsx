@@ -2,6 +2,7 @@
 
 import PriceRangeFilter from './PriceRangeFilter';
 import CategoryFilter from './CategoryFilter';
+import { Product } from '@/types/Product';
 
 export interface FilterValues {
   priceRange: [number, number];
@@ -16,6 +17,7 @@ interface ProductFiltersProps {
   categoryCounts: Record<string, number>;
   priceRange: [number, number]; // min and max prices from all products
   onFilterChange: (filters: FilterValues) => void;
+  allProducts: Product[]; // all products for distribution calculation
 }
 
 export default function ProductFilters({
@@ -24,6 +26,7 @@ export default function ProductFilters({
   categoryCounts,
   priceRange,
   onFilterChange,
+  allProducts,
 }: ProductFiltersProps) {
   
   const handlePriceChange = (newRange: [number, number]) => {
@@ -79,6 +82,7 @@ export default function ProductFilters({
         max={priceRange[1]}
         currentRange={filters.priceRange}
         onChange={handlePriceChange}
+        products={allProducts}
       />
 
       <div className="border-t pt-4" />
@@ -96,11 +100,11 @@ export default function ProductFilters({
       {/* Rating Filter */}
       <div className="space-y-3">
         <h3 className="font-semibold text-sm uppercase tracking-wide">Minimum Rating</h3>
-        <div className="space-y-2 stars--filter">
+        <div className="stars--filter">
           {[4, 3, 2, 1, 0].map((rating) => (
             <label
               key={rating}
-              className="flex items-center gap-2 cursor-pointer p-2 rounded"
+              className="flex items-center gap-2 p-2 cursor-pointer rounded"
             >
               <input
                 type="radio"

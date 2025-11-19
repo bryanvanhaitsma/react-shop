@@ -40,11 +40,11 @@ export default function CategoryFilter({
         )}
       </div>
       
-      <div className="space-y-2 max-h-64 overflow-y-auto category--filter">
+      <div className="category--filter">
         {categories.map((category) => (
           <label
             key={category}
-            className="flex items-center gap-2 cursor-pointer p-2 rounded"
+            className="flex items-center gap-2 p-2 cursor-pointer rounded"
           >
             <input
               type="checkbox"
