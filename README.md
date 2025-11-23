@@ -68,3 +68,4 @@ This project is designed to showcase a compact, production-minded Next.js e-comm
 
 - Unit Tests
   - Built unit tests using Vitest to ensure more reliable code 
+  - utilized mock api calls and mock return data 

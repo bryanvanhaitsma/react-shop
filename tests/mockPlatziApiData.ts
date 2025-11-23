@@ -67,5 +67,47 @@ export const mockPlatziApiProducts = [
     },
 ];
 
+export const mockPlatziApiCategories = [
+  {
+    "id": 42,
+    "name": "Electronic",
+    "slug": "electronic",
+    "image": "https://i.imgur.com/ZANVnHE.jpeg",
+    "creationAt": "2025-11-23T10:35:10.000Z",
+    "updatedAt": "2025-11-23T17:22:20.000Z"
+  },
+  {
+    "id": 43,
+    "name": "Furniture",
+    "slug": "furniture",
+    "image": "https://i.imgur.com/Qphac99.jpeg",
+    "creationAt": "2025-11-23T10:39:47.000Z",
+    "updatedAt": "2025-11-23T10:39:47.000Z"
+  },
+  {
+    "id": 44,
+    "name": "Shoes",
+    "slug": "shoes",
+    "image": "https://i.imgur.com/qNOjJje.jpeg",
+    "creationAt": "2025-11-23T10:39:47.000Z",
+    "updatedAt": "2025-11-23T10:39:47.000Z"
+  },
+  {
+    "id": 45,
+    "name": "Clothes",
+    "slug": "clothes",
+    "image": "https://i.imgur.com/QkIa5tT.jpeg",
+    "creationAt": "2025-11-23T10:39:47.000Z",
+    "updatedAt": "2025-11-23T10:39:47.000Z"
+  },
+  {
+    "id": 46,
+    "name": "Miscellaneous",
+    "slug": "miscellaneous",
+    "image": "https://i.imgur.com/BG8J0Fj.jpg",
+    "creationAt": "2025-11-23T10:39:49.000Z",
+    "updatedAt": "2025-11-23T10:39:49.000Z"
+  }
+];
 
 
