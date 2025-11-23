@@ -22,7 +22,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   useEffect(() => {
     try {
-      const url = new URL(product.image);
+      const url = new URL(product.images[0]);
       if (APPROVED_IMAGE_DOMAINS.includes(url.hostname)) {
         setImageError(false);
       }
@@ -31,7 +31,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       setImageError(true);
       console.error('Invalid image URL:', error);
     }
-  }, [product.image]);
+  }, [product.images]);
 
 
   const handleAddToCart = (product: Product) => {
@@ -60,7 +60,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <Link href={`/product/${product.id}`} passHref>
           {!imageError ? (
             <Image  
-              src={product.image}
+              src={product.images[0]}
               alt={product.title}
               className="w-full h-full object-contain p-4"
               fill

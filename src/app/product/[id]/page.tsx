@@ -72,8 +72,8 @@ export default function ProductDetailPage({ params }: PageProps) {
     );
   }
 
-  // Mock additional images for demo (in real app, these would come from API)
-  const images = [product.image, product.image, product.image];
+  // Use product images or fallback to a copy of the first image for demo
+  const images = product.images.length > 0 ? product.images : [];
 
   return (
     <div className="min-h-screen">
@@ -85,12 +85,14 @@ export default function ProductDetailPage({ params }: PageProps) {
           <div className="grid md:grid-cols-2 gap-8 p-6 md:p-8">
             <div>
               <div className="relative rounded-lg mb-4 aspect-square flex items-center justify-center overflow-hidden product--photo">
-                <Image
-                  src={images[selectedImage]}
-                  alt={product.title}
-                  className="max-w-full max-h-full object-contain p-8"
-                  fill
-                />
+                {images.length > 0 && (
+                  <Image
+                    src={images[selectedImage]}
+                    alt={product.title}
+                    className="object-contain p-8"
+                    fill
+                  />
+                )}
                 <div className="absolute top-4 right-4">
                   <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getSourceBadgeColor(product.source)}`}>
                     {product.source}
@@ -104,24 +106,26 @@ export default function ProductDetailPage({ params }: PageProps) {
               </div>
 
               {/* Thumbnail Images */}
-              <div className="flex gap-2">
-                {images.map((img, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`flex-1 aspect-square product--photo rounded-lg overflow-hidden border-2 transition ${
-                      selectedImage === index ? 'border-blue-600' : 'border-transparent hover:border-gray-300'
-                    }`}
-                  >
-                    {/* <Image
-                      src={img}
-                      alt={`${product.title} ${index + 1}`}
-                      className="w-full h-full object-contain p-2"
-                      fill
-                    /> */}
-                  </button>
-                ))}
-              </div>
+              {images.length > 1 && (
+                <div className="flex gap-2">
+                  {images.map((img, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImage(index)}
+                      className={`relative aspect-square w-20 h-20 product--photo rounded-lg overflow-hidden border-2 transition ${
+                        selectedImage === index ? 'border-blue-600' : 'border-transparent hover:border-gray-300'
+                      }`}
+                    >
+                      <Image
+                        src={img}
+                        alt={`${product.title} ${index + 1}`}
+                        className="object-contain p-2"
+                        fill
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Right Column - Details */}

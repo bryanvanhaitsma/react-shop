@@ -11,7 +11,7 @@ const normalizeProduct = (apiProduct: any): Product => {
     price: apiProduct.price,
     description: apiProduct.description,
     category: apiProduct.category,
-    image: apiProduct.image,
+    images: apiProduct.image ? [apiProduct.image] : [],
     rating: apiProduct.rating,
     source: 'fakestore',
   };

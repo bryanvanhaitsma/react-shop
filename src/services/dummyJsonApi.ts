@@ -11,7 +11,7 @@ const normalizeProduct = (apiProduct: any): Product => {
     price: apiProduct.price,
     description: apiProduct.description,
     category: apiProduct.category,
-    image: apiProduct.thumbnail || apiProduct.images?.[0] || '',
+    images: apiProduct.images || (apiProduct.thumbnail ? [apiProduct.thumbnail] : []),
     rating: {
       rate: apiProduct.rating || 0,
       count: apiProduct.reviews?.length || 0,

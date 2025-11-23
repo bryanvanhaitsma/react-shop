@@ -11,7 +11,7 @@ const normalizeProduct = (apiProduct: any): Product => {
     price: apiProduct.price,
     description: apiProduct.description,
     category: apiProduct.category?.name || 'Uncategorized',
-    image: apiProduct.images?.[0] || apiProduct.category?.image || '',
+    images: apiProduct.images || (apiProduct.category?.image ? [apiProduct.category.image] : []),
     rating: {
       rate: 4.0, // Platzi API doesn't provide ratings, so we use a default
       count: Math.floor(Math.random() * 100) + 10, // Random count for demo
@@ -36,6 +36,7 @@ export const platziApi = {
   getAllProducts: async (limit: number = 20): Promise<Product[]> => {
     try {
       const response = await axios.get(`${BASE_URL}/products?offset=0&limit=${limit}`);
+      console.log(response.data);
       return response.data.map(normalizeProduct);
     } catch (error) {
       console.error('Platzi API Error:', error);

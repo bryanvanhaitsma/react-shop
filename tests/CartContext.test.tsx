@@ -4,6 +4,7 @@ import { CartProvider, CartContext } from '@/context/CartContext';
 import { useContext } from 'react';
 import { Product } from '@/types/Product';
 
+
 // Mock localStorage
 const localStorageMock = (() => {
   let store: Record<string, string> = {};

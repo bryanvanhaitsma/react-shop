@@ -147,8 +147,8 @@ function getStepClassName(currentStep: number, stepNumber: number): string {
           <h2 className="text-xl font-semibold mb-4">Review Your Cart</h2>
           {cart.items.map(item => (
             <div key={item.product.id} className="flex items-center mb-4 p-4 border-b">
-              {item.product.image && (
-                <img src={item.product.image} alt={item.product.title} className="w-16 h-16 object-cover mr-4" />
+              {item.product.images && item.product.images.length > 0 && (
+                <img src={item.product.images[0]} alt={item.product.title} className="w-16 h-16 object-cover mr-4" />
               )}
               <div className="flex-1">
                 <h3 className="font-medium">{item.product.title}</h3>
