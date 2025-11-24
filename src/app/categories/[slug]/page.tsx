@@ -30,6 +30,7 @@ export default function CategoryPage({ params }: PageProps) {
       setLoading(true);
       try {
         const allProducts = await apiService.getAllProducts();
+        // ACT: This should be filtering products by category but dummyJsonApi is having issues
         const filteredProducts = allProducts.filter(
           (product: Product) => product.category.toLowerCase() === decodedCategory.toLowerCase()
         );

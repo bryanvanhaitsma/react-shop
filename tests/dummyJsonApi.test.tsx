@@ -112,6 +112,8 @@ describe('dummyJsonApi', () => {
     expect(products).toBeDefined();
     expect(Array.isArray(products)).toBe(true);
     expect(products.length).toBeGreaterThan(0);
+
+    expect(axios.get).toHaveBeenCalledWith('https://dummyjson.com/products/category/beauty');
   });
 
 
