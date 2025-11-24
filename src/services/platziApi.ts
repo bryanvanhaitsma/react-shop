@@ -36,7 +36,6 @@ export const platziApi = {
   getAllProducts: async (limit: number = 20): Promise<Product[]> => {
     try {
       const response = await axios.get(`${BASE_URL}/products?offset=0&limit=${limit}`);
-      console.log(response.data);
       return response.data.map(normalizeProduct);
     } catch (error) {
       console.error('Platzi API Error:', error);

@@ -1,7 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { renderHook, act } from '@testing-library/react';
 import { dummyJsonApi } from '@/services/dummyJsonApi';
-import { useContext } from 'react';
 import axios from 'axios';
 import { mockDummyJsonApiProducts, mockDummyJsonApiCategories } from './mockDummyJsonApiData';
 

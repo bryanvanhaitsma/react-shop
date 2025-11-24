@@ -23,6 +23,7 @@ export default function CategoryPage({ params }: PageProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const decodedCategory = decodeURIComponent(slug);
+  // console.log('Decoded Category:', decodedCategory);
 
   useEffect(() => {
     const fetchProducts = async () => {
