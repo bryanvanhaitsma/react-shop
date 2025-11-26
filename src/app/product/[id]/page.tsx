@@ -93,7 +93,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                     fill
                   />
                 )}
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-4 left-4">
                   <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getSourceBadgeColor(product.source)}`}>
                     {product.source}
                   </span>
@@ -101,7 +101,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                 <WishlistButton 
                   product={product} 
                   size="md" 
-                  className="absolute top-4 left-4 z-10"
+                  className="absolute top-1 right-2 z-10"
                 />
               </div>
 

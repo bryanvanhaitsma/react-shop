@@ -96,7 +96,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <WishlistButton 
           product={product} 
           size='sm'
-          className='absolute top-2 right-2'
+          className='absolute top-0 right-1'
         />
       </div>
 

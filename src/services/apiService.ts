@@ -40,6 +40,52 @@ export const apiService = {
     }
   },
 
+  // Get products by category across all sources (by category name)
+  getAllProductsByCategory: async (categoryName: string): Promise<Product[]> => {
+    try {
+      const [fakeStoreProducts, dummyJsonProducts, platziCategoryProducts] = await Promise.all([
+        fakeStoreApi.getProductsByCategory(categoryName),
+        dummyJsonApi.getProductsByCategory(categoryName),
+        // Platzi requires category ID; map name -> ID then fetch
+        (async () => {
+          const categories = await platziApi.getCategories();
+          const match = (categories as { id: number; name: string }[]).find(
+            (c) => c.name?.toLowerCase() === categoryName.toLowerCase()
+          );
+          if (!match) return [];
+          return platziApi.getProductsByCategory(match.id);
+        })(),
+      ]);
+
+      return [...fakeStoreProducts, ...dummyJsonProducts, ...platziCategoryProducts];
+    } catch (error) {
+      console.error('Error fetching products by category:', error);
+      return [];
+    }
+  },
+
+  // Get products by category from a specific source
+  getProductsByCategoryFromSource: async (
+    source: ApiSource,
+    category: string | number
+  ): Promise<Product[]> => {
+    try {
+      switch (source) {
+        case 'fakestore':
+          return await fakeStoreApi.getProductsByCategory(String(category));
+        case 'dummyjson':
+          return await dummyJsonApi.getProductsByCategory(String(category));
+        case 'platzi':
+          return await platziApi.getProductsByCategory(Number(category));
+        default:
+          return [];
+      }
+    } catch (error) {
+      console.error(`Error fetching category products from ${source}:`, error);
+      return [];
+    }
+  },
+
   // Get single product by ID
   getProduct: async (id: string): Promise<Product | null> => {
     try {
@@ -84,12 +130,16 @@ export const apiService = {
       const [fakeStoreCategories, dummyJsonCategories, platziCategories] = await Promise.all([
         fakeStoreApi.getCategories(),
         dummyJsonApi.getCategories(),
-        platziApi.getCategoryNames(),
+        platziApi.getCategories(),
       ]);
 
+      // Normalize to names
+      const dummyNames = (dummyJsonCategories as { name: string }[]).map(c => c.name);
+      const platziNames = (platziCategories as { name: string }[]).map(c => c.name);
+
       // Combine and remove duplicates
-      const allCategories = [...fakeStoreCategories, ...dummyJsonCategories, ...platziCategories];
-      return Array.from(new Set(allCategories));
+      const allCategoryNames = [...fakeStoreCategories, ...dummyNames, ...platziNames];
+      return Array.from(new Set(allCategoryNames));
     } catch (error) {
       console.error('Error fetching categories:', error);
       return [];

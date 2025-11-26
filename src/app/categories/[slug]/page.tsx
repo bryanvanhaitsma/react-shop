@@ -29,12 +29,8 @@ export default function CategoryPage({ params }: PageProps) {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const allProducts = await apiService.getAllProducts();
-        // ACT: This should be filtering products by category but dummyJsonApi is having issues
-        const filteredProducts = allProducts.filter(
-          (product: Product) => product.category.toLowerCase() === decodedCategory.toLowerCase()
-        );
-        setProducts(filteredProducts);
+        const categoryProducts = await apiService.getAllProductsByCategory(decodedCategory);
+        setProducts(categoryProducts);
       } catch (error) {
         console.error('Error fetching products:', error);
       }

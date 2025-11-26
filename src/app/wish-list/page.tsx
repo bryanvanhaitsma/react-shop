@@ -32,15 +32,6 @@ export default function WishlistPage() {
       <div className="container mx-auto px-4 py-4">
         <div>
           <h1 className="text-3xl font-bold">Your Wishlist</h1>
-          
-          <div className="flex space-x-4">
-            <button 
-              onClick={clearWishlist}
-              className="text-gray-500 hover:text-gray-700"
-            >
-              Clear All
-            </button>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -49,13 +40,20 @@ export default function WishlistPage() {
           ))}
         </div>
 
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-8 gap-8">
+          <button 
+            onClick={clearWishlist}
+            className="text-gray-500 hover:text-gray-300 hover:underline"
+          >
+            Clear All
+          </button>
           <button 
             onClick={addWishlistToCart}
             className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
           >
             Add All to Cart
           </button>
+          
         </div>
 
       </div>
