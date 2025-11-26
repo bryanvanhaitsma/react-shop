@@ -1,11 +1,8 @@
-import Link from 'next/link';
 import React from 'react';
-import { fakeStoreApi } from '@/services/fakeStoreApi';
-import { dummyJsonApi } from '@/services/dummyJsonApi';
-import { platziApi } from '@/services/platziApi';
-import { getSourceBadgeColor } from '@/utils/formatters';
-import { slugifyString } from '@/utils/formatters';
 import Header from '@/components/ui/Header';
+import CategoryCard from '@/components/categories/CategoryCard';
+import { apiService } from '@/services/apiService';
+import { platziApi } from '@/services/platziApi';
 
 
 
@@ -13,13 +10,48 @@ import Header from '@/components/ui/Header';
 
 
 export default async function CategoriesPage() {
-
-  // Fetch categories from each source in parallel
-  const [fakeCategories, dummyCategories, platziCategories] = await Promise.all([
-    fakeStoreApi.getCategories(),
-    dummyJsonApi.getCategories(),
+  // Fetch unified category names and supporting data for images/counts
+  const [allCategoryNames, allProducts, platziCategories] = await Promise.all([
+    apiService.getAllCategories(),
+    apiService.getAllProducts(),
     platziApi.getCategories(),
   ]);
+
+  // Build counts per category from all products
+  const counts = new Map<string, number>();
+  for (const p of allProducts) {
+    const name = (p.category || '').toLowerCase();
+    if (!name) continue;
+    counts.set(name, (counts.get(name) || 0) + 1);
+  }
+
+  // Map category name -> image using Platzi categories first; else first product image; else null
+  const platziImageByName = new Map<string, string>();
+  for (const c of platziCategories as { name: string; image?: string; slug?: string }[]) {
+    if (c?.name) platziImageByName.set(c.name.toLowerCase(), c.image || '');
+  }
+
+  const firstImageByName = new Map<string, string | null>();
+  for (const p of allProducts) {
+    const name = (p.category || '').toLowerCase();
+    if (!name) continue;
+    if (!firstImageByName.has(name)) {
+      const img = p.images && p.images.length > 0 ? p.images[0] : null;
+      firstImageByName.set(name, img);
+    }
+  }
+
+  // Prepare sorted category list with display data
+  const categories = allCategoryNames
+    .map((n) => n.trim())
+    .filter(Boolean)
+    .map((n) => {
+      const key = n.toLowerCase();
+      const image = platziImageByName.get(key) || firstImageByName.get(key) || null;
+      const count = counts.get(key) || 0;
+      return { name: n, imageUrl: image, count };
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className="min-h-screen">
@@ -27,84 +59,14 @@ export default async function CategoriesPage() {
       <Header />
 
       <main className="container mx-auto px-4 py-8">
-        <h1>Categories</h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-          {/* FakeStore Categories */}
-          <section className="rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <span className="px-2 py-1 rounded text-sm font-semibold bg-blue-100 text-blue-800">FakeStore</span>
-              <span className="text-sm">({fakeCategories.length})</span>
-            </h2>
-            <ul className="space-y-2">
-              {fakeCategories.map((cat: string) => (
-                <li key={`fakestore-${cat}`}>
-                  <Link href={`/categories/${slugifyString(cat)}`}
-                    className="block w-full text-left px-3 py-2 rounded transition flex items-center justify-between"
-                  >
-                    <span className="capitalize">{cat}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {/* DummyJSON Categories */}
-          <section className="rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <span className="px-2 py-1 rounded text-sm font-semibold bg-green-100 text-green-800">DummyJSON</span>
-              <span className="text-sm">({dummyCategories.length})</span>
-            </h2>
-            <ul className="space-y-2">
-              {dummyCategories.map((category) => (
-                <li key={`dummy-${category.slug}`}>
-                  <Link href={`/categories/${encodeURIComponent(category.slug)}`}
-                    className="block w-full text-left px-3 py-2 rounded transition flex items-center justify-between"
-                  >
-                    <span className="capitalize">{category.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section> 
-
-          {/* Platzi Categories */}
-          <section className="rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <span className="px-2 py-1 rounded text-sm font-semibold bg-purple-100 text-purple-800">Platzi</span>
-              <span className="text-sm">({platziCategories.length})</span>
-            </h2>
-            <ul className="space-y-2">
-              {platziCategories.map((category) => (
-                <li key={`platzi-${category.id}`}>
-                  <Link href={`/categories/${category.slug}`}
-                    className="block w-full text-left px-3 py-2 rounded transition flex items-center justify-between"
-                  >
-                    <span className="capitalize">{category.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
+        <h1 className="text-2xl font-semibold mb-6">Categories</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {categories.map((c) => (
+            <CategoryCard key={c.name} name={c.name} imageUrl={c.imageUrl || undefined} count={c.count} />
+          ))}
         </div>
 
-        {/* All categories combined quick links */}
-        {/* <div className="mt-8 rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold mb-4">All Categories</h3>
-          <div className="flex flex-wrap gap-3">
-            {Array.from(new Set([
-              ...fakeCategories,
-              ...dummyCategories,
-              ...platziNames,
-            ])).map((cat: string) => (
-              <Link key={`all-${cat}`} href={`/categories/${encodeURIComponent(cat)}`}
-                className="inline-block px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 transition"
-              >
-                {cat}
-              </Link>
-            ))}
-          </div>
-        </div> */}
+        {/* End */}
 
       </main>
     </div>
