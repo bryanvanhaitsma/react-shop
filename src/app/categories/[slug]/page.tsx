@@ -51,12 +51,14 @@ export default function CategoryPage({ params }: PageProps) {
     );
   }
 
+  // todo: standardize all buttons
+  
   if (products.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center no-products-found">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">No Products Found</h1>
-          <p className="text-gray-600 mb-6">No products found in this category.</p>
+          <h1 className="text-4xl font-bold mb-4">No Products Found</h1>
+          <p className="mb-6">No products found in this category.</p>
           <Link 
             href="/"
             className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"

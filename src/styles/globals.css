@@ -141,6 +141,33 @@ footer {
   background-color: var(--background-photo);  
 }
 
+
+/* =============== categories ================== */
+
+.category--card {
+  background-color: var(--background-secondary);
+  color: var(--font-color);
+  transition: box-shadow 300ms, background-color 300ms;
+  box-shadow: 0 20px 25px -5px var(--shadow-hover-1), 0 10px 10px -5px var(--shadow-hover-2);
+  /* todo: make these shadows consistent with a variable */
+} 
+.category--card:hover {
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 20px 25px -5px #ccc, 0 10px 10px -5px #ccc;
+}
+
+.no-products-found {
+  
+  h1 {
+    color: var(--font-color);
+  }
+  
+  p {
+    color: var(--font-color-alt);
+  }
+} 
+
 /* =============== cart ================== */
 
 .cart--item {

@@ -67,8 +67,10 @@ export const dummyJsonApi = {
 
   // Get products by category
   getProductsByCategory: async (category: string): Promise<Product[]> => {
+    const categorySlugified = category.toLowerCase().replace(/ /g, '-');
+    
     try {
-      const response = await axios.get(`${BASE_URL}/products/category/${category}`);
+      const response = await axios.get(`${BASE_URL}/products/category/${categorySlugified}`);
       return response.data.products.map(normalizeProduct);
     } catch (error) {
       console.error('DummyJSON API Error:', error);
